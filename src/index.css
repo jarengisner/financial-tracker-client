@@ -1,0 +1,13 @@
+/*
+main background color - #212A31
+gray highlights - #2E3944
+nice blue - 124E66
+grey blue - #748D92
+nice white grey(text) - D3D9D4
+*/
+
+body {
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #212a31;
+}
