@@ -2,6 +2,7 @@
   "name": "financial-tracker-electron",
   "version": "0.1.0",
   "private": true,
+  "main": "main.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -10,8 +11,12 @@
     "@types/node": "^16.18.97",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
+    "bootstrap": "^5.3.3",
+    "electron-is-dev": "^3.0.1",
     "react": "^18.3.1",
+    "react-bootstrap": "^2.10.2",
     "react-dom": "^18.3.1",
+    "react-router-dom": "^6.23.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
@@ -20,7 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron": "electron ."
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +45,28 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "electron": "^30.0.3"
+  },
+  "build": {
+    "appId": "com.example.financial-tracker-electron",
+    "files": [
+      "build/**/*",
+      "public/electron.js"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "productName": "Financial Tracker",
+    "win": {
+      "icon": "assets/icons8-graph-64.png"
+    },
+    "mac": {
+      "icon": "assets/icons8-graph-64.png"
+    },
+    "linux": {
+      "icon": "assets/icons8-graph-64.png"
+    }
   }
 }
