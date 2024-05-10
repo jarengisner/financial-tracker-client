@@ -1,0 +1,17 @@
+.open-menu-button {
+  width: 50%;
+  background-color: #212a31;
+  border: none;
+  margin-top: 10%;
+}
+
+.open-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.open-menu-icon {
+  font-size: xx-large;
+  color: #d3d9d4;
+}
