@@ -1,8 +1,9 @@
 .open-menu-button {
   width: 50%;
-  background-color: #212a31;
+  background-color: #124e66;
   border: none;
-  margin-top: 10%;
+  margin-top: 15%;
+  border-radius: 20px;
 }
 
 .open-button-container {
@@ -14,4 +15,46 @@
 .open-menu-icon {
   font-size: xx-large;
   color: #d3d9d4;
+  margin-top: 6%;
+  margin-bottom: 5%;
+}
+
+/*close button*/
+
+.close-menu-button,
+.home-menu-button,
+.settings-menu-button {
+  width: 50%;
+  background-color: #124e66;
+  border: none;
+}
+
+.close-button-container,
+.home-button-container,
+.settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-menu-icon,
+.home-menu-icon,
+.settings-menu-icon {
+  font-size: xx-large;
+  color: #d3d9d4;
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.close-menu-button {
+  margin-top: 10%;
+}
+
+.settings-menu-button {
+  margin-bottom: 10%;
 }

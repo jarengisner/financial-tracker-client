@@ -1,5 +1,47 @@
 import { Row } from 'react-bootstrap';
+import { stateManipulationFunction } from '../../types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCircleXmark,
+  faHouse,
+  faGear,
+} from '@fortawesome/free-solid-svg-icons';
 
-export const SideBar: React.FC = () => {
-  return <Row>Icon</Row>;
+//styles
+import '../home-side-bar/side-bar-styles.css';
+
+interface sideBarOpenedProps {
+  closeSideBar: stateManipulationFunction;
+}
+
+export const SideBar: React.FC<sideBarOpenedProps> = ({ closeSideBar }) => {
+  return (
+    <div className='icon-container'>
+      <Row>
+        <div className='close-button-container'>
+          <button className='close-menu-button'>
+            <FontAwesomeIcon
+              icon={faCircleXmark}
+              className='close-menu-icon'
+              onClick={() => closeSideBar()}
+            />
+          </button>
+        </div>
+      </Row>
+      <Row>
+        <div className='home-button-container'>
+          <button className='home-menu-button'>
+            <FontAwesomeIcon icon={faHouse} className='home-menu-icon' />
+          </button>
+        </div>
+      </Row>
+      <Row>
+        <div className='settings-button-container'>
+          <button className='settings-menu-button'>
+            <FontAwesomeIcon icon={faGear} className='settings-menu-icon' />
+          </button>
+        </div>
+      </Row>
+    </div>
+  );
 };

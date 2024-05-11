@@ -8,6 +8,9 @@ import { SideBarClosed } from '../home-side-bar/SideBarClosed';
 //types
 import { stateManipulationFunction } from '../../types';
 
+//styles
+import '../main-view/main-view-styles.css';
+
 export const MainView: React.FC = () => {
   const storedUser = localStorage.getItem('user');
   const storedToken = localStorage.getItem('token');
@@ -19,12 +22,16 @@ export const MainView: React.FC = () => {
     setSideBarOpen(true);
   };
 
+  const closeSideBar: stateManipulationFunction = (): void => {
+    setSideBarOpen(false);
+  };
+
   return (
     <BrowserRouter>
       {/**user && token &&  */}
       {sideBarOpen ? (
-        <Col md={2} style={{ height: '100vh' }}>
-          <SideBar />
+        <Col md={2} style={{ height: '100vh' }} className='open-side-menu'>
+          <SideBar closeSideBar={closeSideBar} />
         </Col>
       ) : (
         <Col md={1} style={{ height: '100vh' }}>
@@ -33,6 +40,14 @@ export const MainView: React.FC = () => {
       )}
       <Routes>
         <Route path='/login' element={<Login />} />
+        <Route
+          path='/'
+          element={
+            <div>
+              <h1>Home screen</h1>
+            </div>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
