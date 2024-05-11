@@ -10,7 +10,7 @@
 
 .login-card {
   width: 30%;
-  height: 30vh;
+  height: 40vh;
   background-color: #748d92;
 }
 
@@ -45,4 +45,12 @@
 .login-input-title {
   font-size: large;
   font-family: Poppins, sans-serif;
+}
+
+.login-submit-button {
+  background-color: #d3d9d4;
+  border: none;
+  color: black;
+  margin-top: 6%;
+  width: 50%;
 }
