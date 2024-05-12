@@ -1,0 +1,52 @@
+/*
+main background color - #212A31
+gray highlights - #2E3944
+nice blue - 124E66
+grey blue - #748D92
+nice white grey(text) - D3D9D4
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+.tracker-card {
+  background-color: #748d92;
+}
+
+.tracker-card-title {
+  font-family: Poppins, sans-serif;
+  font-weight: 700;
+}
+
+.tracker-card-info-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tracker-title-container {
+  margin-left: 1%;
+}
+
+.year-or-month {
+  text-align: left;
+}
+
+.enter-tracker-view-button {
+  background-color: #748d92;
+  border: none;
+}
+
+.enter-tracker-view-icon {
+  color: #d3d9d4;
+  font-size: xx-large;
+  transition: color 0.3s ease;
+}
+
+.enter-tracker-view-icon:hover {
+  color: #124e66;
+}
+
+.enter-tracker-view-container {
+  margin-right: 1%;
+}

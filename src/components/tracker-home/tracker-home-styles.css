@@ -1,0 +1,18 @@
+/*
+main background color - #212A31
+gray highlights - #2E3944
+nice blue - 124E66
+grey blue - #748D92
+nice white grey(text) - D3D9D4
+*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+.main-content-container {
+  height: 100vh;
+}
+
+.tracker-home-title {
+  color: #d3d9d4;
+  margin-top: 1%;
+  font-family: Poppins, sans-serif;
+}

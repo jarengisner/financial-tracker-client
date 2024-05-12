@@ -9,6 +9,7 @@ import {
 
 //styles
 import '../home-side-bar/side-bar-styles.css';
+import { Link } from 'react-router-dom';
 
 interface sideBarOpenedProps {
   closeSideBar: stateManipulationFunction;
@@ -29,11 +30,13 @@ export const SideBar: React.FC<sideBarOpenedProps> = ({ closeSideBar }) => {
         </div>
       </Row>
       <Row>
-        <div className='home-button-container'>
-          <button className='home-menu-button'>
-            <FontAwesomeIcon icon={faHouse} className='home-menu-icon' />
-          </button>
-        </div>
+        <Link to='/'>
+          <div className='home-button-container'>
+            <button className='home-menu-button'>
+              <FontAwesomeIcon icon={faHouse} className='home-menu-icon' />
+            </button>
+          </div>
+        </Link>
       </Row>
       <Row>
         <div className='settings-button-container'>

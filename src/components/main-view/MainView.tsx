@@ -12,6 +12,7 @@ import { loginStateManipulation, stateManipulationFunction } from '../../types';
 //styles
 import '../main-view/main-view-styles.css';
 import { TrackerList } from '../tracker-list/TrackerList';
+import { TrackerHome } from '../tracker-home/TrackerHome';
 
 export const MainView: React.FC = () => {
   const storedUser = localStorage.getItem('user');
@@ -115,6 +116,11 @@ export const MainView: React.FC = () => {
                 <Navigate to='/login' />
               )
             }
+          />
+
+          <Route
+            path='/trackers/:id'
+            element={<TrackerHome trackers={userTrackers} />}
           />
         </Routes>
       </Row>
