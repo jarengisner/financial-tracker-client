@@ -20,7 +20,10 @@ export const SideBar: React.FC<sideBarOpenedProps> = ({ closeSideBar }) => {
     <div className='icon-container'>
       <Row>
         <div className='close-button-container'>
-          <button className='close-menu-button'>
+          <button
+            className='close-menu-button'
+            data-testid='closeSideBarButton'
+          >
             <FontAwesomeIcon
               icon={faCircleXmark}
               className='close-menu-icon'
@@ -32,7 +35,7 @@ export const SideBar: React.FC<sideBarOpenedProps> = ({ closeSideBar }) => {
       <Row>
         <Link to='/'>
           <div className='home-button-container'>
-            <button className='home-menu-button'>
+            <button className='home-menu-button' data-testid='homeButton'>
               <FontAwesomeIcon icon={faHouse} className='home-menu-icon' />
             </button>
           </div>
