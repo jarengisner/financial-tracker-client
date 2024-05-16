@@ -6,6 +6,7 @@ import { Login } from '../login-component/Login';
 import { SideBarClosed } from '../home-side-bar/SideBarClosed';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 //types
 import { loginStateManipulation, stateManipulationFunction } from '../../types';
@@ -14,60 +15,49 @@ import { loginStateManipulation, stateManipulationFunction } from '../../types';
 import '../main-view/main-view-styles.css';
 import { TrackerList } from '../tracker-list/TrackerList';
 import { TrackerHome } from '../tracker-home/TrackerHome';
+import { TrackerItem } from '../tracker-list/tracker-list-types';
 
 export const MainView: React.FC = () => {
+  //User related state
   const storedUser = localStorage.getItem('user');
   const storedToken = localStorage.getItem('token');
   const [user, setUser] = useState(storedUser ? JSON.parse(storedUser) : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
+  const [valid, setValidToken] = useState<boolean>(false);
+
+  //render specific state
   const [sideBarOpen, setSideBarOpen] = useState<Boolean>(false);
-  const [userTrackers, setUserTrackers] = useState([]);
-  const nav = useNavigate();
+  const [loading, setLoading] = useState<boolean>(true);
+
+  //prop related state
+  const [selectedTracker, setSelectedTracker] = useState<TrackerItem>();
 
   //fetch trackers
   useEffect(() => {
-    const fetchData = async () => {
-      if (!storedUser || !storedToken) {
-        nav('/login');
-      } else {
-        try {
-          const userId: number = user.id;
-          const response = await fetch(
-            `http://localhost:8080/trackers/${userId}/all`,
-            {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+    if (storedUser && storedToken && valid === false) {
+      const validationRequest = {
+        token: storedToken,
+      };
 
-          if (!response) {
-            throw new Error('Unsuccessful response from server');
-          }
-
-          if (response.status === 204) {
-            setUserTrackers([]);
-            return;
-          }
-
-          if (response.status === 401) {
-            console.log('caught the error');
-          }
-
-          const data = await response.json();
-          console.log(data);
-
-          setUserTrackers(data);
-        } catch (error) {
-          console.error('Error fetching data:', error);
+      fetch('http://localhost:8080/validate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(validationRequest),
+      }).then((res) => {
+        if (res.ok) {
+          setLoading(false);
+          setValidToken(true);
+          return;
+        } else {
+          localStorage.clear();
+          setUser(null);
+          setToken(null);
         }
-      }
-
-      fetchData();
-    };
-  }, [user.id, token, nav, storedToken, storedUser]);
+      });
+    }
+  }, [storedToken, storedUser]);
 
   //********************************************************************************************************************************************************************* */
 
@@ -118,10 +108,16 @@ export const MainView: React.FC = () => {
           <Route
             path='/'
             element={
-              user && token ? (
+              user && token && loading === false ? (
                 <Col md={10} className='main-component'>
                   <div className='main-component-content-container'>
-                    <TrackerList trackers={userTrackers} />
+                    <TrackerList user={user} token={token} />
+                  </div>
+                </Col>
+              ) : user && token && loading ? (
+                <Col md={10} className='main-component'>
+                  <div className='main-component-content-container'>
+                    <ClipLoader />
                   </div>
                 </Col>
               ) : (
@@ -132,7 +128,7 @@ export const MainView: React.FC = () => {
 
           <Route
             path='/trackers/:id'
-            element={<TrackerHome trackers={userTrackers} />}
+            element={<TrackerHome tracker={selectedTracker} />}
           />
         </Routes>
       </Row>

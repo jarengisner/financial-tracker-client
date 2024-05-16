@@ -1,3 +1,8 @@
+export interface User {
+  user_id: number;
+  username: string;
+}
+
 export interface TrackerItem {
   tracker_id: number;
   user_id: number;
@@ -7,6 +12,11 @@ export interface TrackerItem {
   wants_goal: number;
   year: boolean;
   month: boolean;
+}
+
+export interface listUser {
+  username: String;
+  id: number;
 }
 
 /**

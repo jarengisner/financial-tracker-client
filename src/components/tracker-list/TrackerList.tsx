@@ -1,28 +1,70 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { TrackerItem } from './tracker-list-types';
+import { User, listUser } from './tracker-list-types';
 import { Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartSimple } from '@fortawesome/free-solid-svg-icons';
+import { TrackerItem } from './tracker-list-types';
 
 //stylesheet
 import '../tracker-list/tracker-list-styles.css';
 import { Link } from 'react-router-dom';
 
 interface TrackerComponentProps {
-  trackers: TrackerItem[];
+  user: listUser;
+  token: string;
 }
 
-export const TrackerList: React.FC<TrackerComponentProps> = ({ trackers }) => {
+export const TrackerList: React.FC<TrackerComponentProps> = ({
+  user,
+  token,
+}) => {
   const [usersTrackers, setUsersTrackers] = useState<TrackerItem[]>([]);
 
+  //************************************************************************************************************************************************************************************ */
   useEffect(() => {
-    setUsersTrackers(trackers);
-  }, [trackers]);
+    const fetchData = async () => {
+      try {
+        const userId: number = user.id;
+        const response = await fetch(
+          `http://localhost:8080/trackers/${userId}/all`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!response) {
+          throw new Error('Unsuccessful response from server');
+        }
+
+        if (response.status === 204) {
+          setUsersTrackers([]);
+          return;
+        }
+
+        if (response.status === 401) {
+          console.log('caught the error');
+        }
+
+        const data = await response.json();
+        console.log(data);
+
+        setUsersTrackers(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [user, token]);
 
   return (
     <div>
-      {trackers.length > 0 ? (
+      {usersTrackers.length > 0 ? (
         usersTrackers.map((tracker) => (
           <Card className='tracker-card' key={tracker.tracker_id}>
             <div className='tracker-card-info-container'>
