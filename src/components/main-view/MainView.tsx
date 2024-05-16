@@ -5,6 +5,7 @@ import { SideBar } from '../home-side-bar/SideBar';
 import { Login } from '../login-component/Login';
 import { SideBarClosed } from '../home-side-bar/SideBarClosed';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 //types
 import { loginStateManipulation, stateManipulationFunction } from '../../types';
@@ -21,43 +22,54 @@ export const MainView: React.FC = () => {
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [sideBarOpen, setSideBarOpen] = useState<Boolean>(false);
   const [userTrackers, setUserTrackers] = useState([]);
+  const nav = useNavigate();
 
   //fetch trackers
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const userId: number = user.id;
-        const response = await fetch(
-          `http://localhost:8080/trackers/${userId}/all`,
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
+      if (!storedUser || !storedToken) {
+        nav('/login');
+      } else {
+        try {
+          const userId: number = user.id;
+          const response = await fetch(
+            `http://localhost:8080/trackers/${userId}/all`,
+            {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (!response) {
+            throw new Error('Unsuccessful response from server');
           }
-        );
 
-        if (!response) {
-          throw new Error('Unsuccessful response from server');
+          if (response.status === 204) {
+            setUserTrackers([]);
+            return;
+          }
+
+          if (response.status === 401) {
+            console.log('caught the error');
+          }
+
+          const data = await response.json();
+          console.log(data);
+
+          setUserTrackers(data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
         }
-
-        if (response.status === 204) {
-          setUserTrackers([]);
-          return;
-        }
-
-        const data = await response.json();
-        console.log(data);
-
-        setUserTrackers(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
       }
-    };
 
-    fetchData(); // Call fetchData when component mounts or dependencies change
-  }, [user.id, token]);
+      fetchData();
+    };
+  }, [user.id, token, nav, storedToken, storedUser]);
+
+  //********************************************************************************************************************************************************************* */
 
   const openSideBar: stateManipulationFunction = (): void => {
     setSideBarOpen(true);
@@ -113,7 +125,7 @@ export const MainView: React.FC = () => {
                   </div>
                 </Col>
               ) : (
-                <Navigate to='/login' />
+                <Navigate to='/login' replace />
               )
             }
           />
