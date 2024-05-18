@@ -29,9 +29,6 @@ export const MainView: React.FC = () => {
   const [sideBarOpen, setSideBarOpen] = useState<Boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
-  //prop related state
-  const [selectedTracker, setSelectedTracker] = useState<TrackerItem>();
-
   //fetch trackers
   useEffect(() => {
     if (storedUser && storedToken && valid === false) {
@@ -128,7 +125,13 @@ export const MainView: React.FC = () => {
 
           <Route
             path='/trackers/:id'
-            element={<TrackerHome tracker={selectedTracker} />}
+            element={
+              user && token ? (
+                <TrackerHome token={token} />
+              ) : (
+                <Navigate to='/login' />
+              )
+            }
           />
         </Routes>
       </Row>

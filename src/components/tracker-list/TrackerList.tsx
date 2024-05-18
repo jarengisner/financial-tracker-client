@@ -63,7 +63,7 @@ export const TrackerList: React.FC<TrackerComponentProps> = ({
   }, [user, token]);
 
   return (
-    <div>
+    <div className='list-container'>
       {usersTrackers.length > 0 ? (
         usersTrackers.map((tracker) => (
           <Card className='tracker-card' key={tracker.tracker_id}>
