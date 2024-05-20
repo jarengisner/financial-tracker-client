@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Col } from 'react-bootstrap';
+import { Button, Card, Col, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { TrackerItem } from '../tracker-list/tracker-list-types';
 import { ClipLoader } from 'react-spinners';
+
+//icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCog } from '@fortawesome/free-solid-svg-icons';
 
 //styles
 import '../tracker-home/tracker-home-styles.css';
@@ -38,13 +42,12 @@ export const TrackerHome: React.FC<TrackerHomeProps> = ({ token }) => {
       }
 
       const goalData = await goalResponse.json();
+      console.log(goalData);
 
       setTrackerGoals(goalData);
     } catch (err) {
       console.log(err);
     }
-
-    goalFetcher();
   };
 
   /**
@@ -98,25 +101,54 @@ export const TrackerHome: React.FC<TrackerHomeProps> = ({ token }) => {
             ) : (
               <p className='year-month-caption'>Monthly Tracker</p>
             )}
-            {trackerGoals.length > 0 ? (
-              trackerGoals.map((goal) => (
-                <Card key={goal.goal_id}>
-                  <p>{goal.message}</p>
-                </Card>
-              ))
-            ) : (
-              <p>No goals found for this tracker</p>
-            )}
+            <p className='year-month-caption goal-caption-title'>Your goals:</p>
           </div>
+          {trackerGoals.length > 0 ? (
+            trackerGoals.map((goal) => (
+              <Row>
+                <Col md={3}>
+                  <Card key={goal.goal_id} className='tracker-home-goal-card'>
+                    <p>{goal.message}</p>
+                  </Card>
+                </Col>
+              </Row>
+            ))
+          ) : (
+            <p>No goals found for this tracker</p>
+          )}
           <div>
             <p className='year-month-caption'>Data visualization here</p>
           </div>
+          <Row>
+            {currentTracker.savings_goal ? (
+              <Col>
+                <Card className='money-goals-card'>
+                  <p className='year-month-title'>Current Savings Goal:</p>
+                  <p>{`$ ${currentTracker.savings_goal}`}</p>
+                </Card>
+              </Col>
+            ) : null}
+            {currentTracker.wants_goal ? (
+              <Col>
+                <Card className='money-goals-card'>
+                  <p className='year-month-title'>Current Wants Goal:</p>
+                  <p>{`$ ${currentTracker.wants_goal}`}</p>
+                </Card>
+              </Col>
+            ) : null}
+            {currentTracker.needs_goal ? (
+              <Col>
+                <Card className='money-goals-card last-money-card'>
+                  <p className='year-month-title'>Current Needs Goal:</p>
+                  <p>{`$ ${currentTracker.needs_goal}`}</p>
+                </Card>
+              </Col>
+            ) : null}
+          </Row>
           <div>
-            <p className='year-month-caption'>
-              Here we will have a dailies button and a settings button that
-              allows for editing things about the tracker in general, such as
-              the name, etc
-            </p>
+            <Button className='settings-button'>
+              <FontAwesomeIcon icon={faCog} className='settings-icon' />
+            </Button>
           </div>
         </>
       ) : (

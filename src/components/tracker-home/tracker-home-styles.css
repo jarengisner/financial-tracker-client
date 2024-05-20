@@ -33,3 +33,40 @@ nice white grey(text) - D3D9D4
   flex-direction: column;
   align-items: first baseline;
 }
+
+.tracker-home-goal-card {
+  background-color: #748d92;
+  color: #d3d9d4;
+}
+
+.money-goals-card {
+  background-color: #748d92;
+  color: #d3d9d4;
+}
+
+.last-money-card {
+  margin-right: 1%;
+}
+
+.settings-button {
+  background-color: #748d92;
+  color: #d3d9d4;
+  font-size: xx-large;
+  width: 33%;
+  border: none;
+  margin-top: 2%;
+  transition: color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+
+.settings-button:hover {
+  background-color: #d3d9d4;
+  color: #748d92;
+  width: 33%;
+  border: none;
+  margin-top: 2%;
+}
+
+.goal-caption-title {
+  font-weight: 700;
+}
