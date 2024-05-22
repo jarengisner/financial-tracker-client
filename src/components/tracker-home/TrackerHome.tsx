@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom';
 import { TrackerItem } from '../tracker-list/tracker-list-types';
 import { ClipLoader } from 'react-spinners';
 
+//components
+import { DataVisuals } from '../data-visuals/DataVisuals';
+
 //icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +16,7 @@ import '../tracker-home/tracker-home-styles.css';
 
 //types
 import { Goal } from './tracker-home-types';
+import { stateManipulationFunction } from '../../types';
 
 interface TrackerHomeProps {
   token: string;
@@ -117,7 +121,7 @@ export const TrackerHome: React.FC<TrackerHomeProps> = ({ token }) => {
             <p>No goals found for this tracker</p>
           )}
           <div>
-            <p className='year-month-caption'>Data visualization here</p>
+            <DataVisuals />
           </div>
           <Row>
             {currentTracker.savings_goal ? (

@@ -5,6 +5,8 @@ import {
   faCircleXmark,
   faHouse,
   faGear,
+  faSun,
+  faLightbulb,
 } from '@fortawesome/free-solid-svg-icons';
 
 //styles
@@ -37,6 +39,24 @@ export const SideBar: React.FC<sideBarOpenedProps> = ({ closeSideBar }) => {
           <div className='home-button-container'>
             <button className='home-menu-button' data-testid='homeButton'>
               <FontAwesomeIcon icon={faHouse} className='home-menu-icon' />
+            </button>
+          </div>
+        </Link>
+      </Row>
+      <Row>
+        <Link to=''>
+          <div className='home-button-container'>
+            <button className='home-menu-button' data-testid='homeButton'>
+              <FontAwesomeIcon icon={faSun} className='home-menu-icon' />
+            </button>
+          </div>
+        </Link>
+      </Row>
+      <Row>
+        <Link to=''>
+          <div className='home-button-container'>
+            <button className='home-menu-button' data-testid='homeButton'>
+              <FontAwesomeIcon icon={faLightbulb} className='home-menu-icon' />
             </button>
           </div>
         </Link>

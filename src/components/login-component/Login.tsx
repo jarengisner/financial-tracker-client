@@ -74,7 +74,7 @@ export const Login: React.FC<loginProps> = ({ onLogin }) => {
             <div className='password-container'>
               <Form.Label className='login-input-title'>Password</Form.Label>
               <Form.Control
-                type='text'
+                type='password'
                 value={password}
                 required
                 placeholder='Password'

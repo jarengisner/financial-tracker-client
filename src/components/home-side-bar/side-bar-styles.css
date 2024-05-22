@@ -37,9 +37,7 @@
   justify-content: center;
 }
 
-.close-menu-icon,
-.home-menu-icon,
-.settings-menu-icon {
+.home-menu-icon {
   font-size: xx-large;
   color: #d3d9d4;
 }
@@ -57,4 +55,25 @@
 
 .settings-menu-button {
   margin-bottom: 10%;
+}
+
+.close-menu-button {
+  color: #d3d9d4;
+  font-size: xx-large;
+  transition: color 0.5s ease;
+}
+.close-menu-button:hover {
+  color: #ff5151;
+  font-size: xx-large;
+}
+
+.settings-menu-button {
+  color: #d3d9d4;
+  font-size: xx-large;
+  transition: color 0.5s ease;
+}
+
+.settings-menu-button:hover {
+  color: #ff7f50;
+  font-size: xx-large;
 }

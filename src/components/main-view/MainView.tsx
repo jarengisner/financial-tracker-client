@@ -16,6 +16,8 @@ import '../main-view/main-view-styles.css';
 import { TrackerList } from '../tracker-list/TrackerList';
 import { TrackerHome } from '../tracker-home/TrackerHome';
 import { TrackerItem } from '../tracker-list/tracker-list-types';
+import { Goals } from '../tracker-goals/Goals';
+import { Daily } from '../tracker-daily/Daily';
 
 export const MainView: React.FC = () => {
   //User related state
@@ -101,7 +103,6 @@ export const MainView: React.FC = () => {
           <Navigate to='/login' />
         )}
         <Routes>
-          <Route path='/login' element={<Login onLogin={onLogin} />} />
           <Route
             path='/'
             element={
@@ -122,6 +123,7 @@ export const MainView: React.FC = () => {
               )
             }
           />
+          <Route path='/login' element={<Login onLogin={onLogin} />} />
 
           <Route
             path='/trackers/:id'
@@ -132,6 +134,14 @@ export const MainView: React.FC = () => {
                 <Navigate to='/login' />
               )
             }
+          />
+          <Route
+            path='/goals'
+            element={user && token ? <Goals /> : <Navigate to='/login' />}
+          />
+          <Route
+            path='/daily'
+            element={user && token ? <Daily /> : <Navigate to='/login' />}
           />
         </Routes>
       </Row>
