@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
-import { TrackerItem } from '../tracker-list/tracker-list-types';
+import { Link, useParams } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 
 //components
@@ -17,6 +16,10 @@ import '../tracker-home/tracker-home-styles.css';
 //types
 import { Goal } from './tracker-home-types';
 import { stateManipulationFunction } from '../../types';
+import { TrackerItem } from '../tracker-list/tracker-list-types';
+
+//child component
+import { TrackerSettings } from '../tracker-settings/TrackerSettings';
 
 interface TrackerHomeProps {
   token: string;
@@ -25,8 +28,9 @@ interface TrackerHomeProps {
 export const TrackerHome: React.FC<TrackerHomeProps> = ({ token }) => {
   const { id } = useParams();
 
-  const [currentTracker, setCurrentTracker] = useState<TrackerItem>();
+  const [currentTracker, setCurrentTracker] = useState<TrackerItem | null>();
   const [trackerGoals, setTrackerGoals] = useState<Array<Goal>>([]);
+  const [settings, setSettingsStatus] = useState<boolean>(false);
 
   const goalFetcher = async () => {
     try {
@@ -54,10 +58,13 @@ export const TrackerHome: React.FC<TrackerHomeProps> = ({ token }) => {
     }
   };
 
-  /**
-   * useEffect uses the tracker id to fetch the trackers, as well as the goals
-   * that are associated with the trackers so that both are ready to render
-   */
+  const openSettings = (): void => {
+    setSettingsStatus(true);
+  };
+
+  const closeSettings = (): void => {
+    setSettingsStatus(false);
+  };
 
   useEffect(() => {
     const fetchTracker = async () => {
@@ -77,6 +84,8 @@ export const TrackerHome: React.FC<TrackerHomeProps> = ({ token }) => {
           throw new Error('Unauthorized');
         } else if (response.status === 500) {
           throw new Error('Server error please try again later');
+        } else if (response.status === 404) {
+          setCurrentTracker(null);
         }
 
         const data = await response.json();
@@ -90,11 +99,11 @@ export const TrackerHome: React.FC<TrackerHomeProps> = ({ token }) => {
 
     fetchTracker();
     goalFetcher();
-  }, []);
+  }, [id, token]);
 
   return (
     <Col md={10}>
-      {currentTracker ? (
+      {currentTracker && settings === false ? (
         <>
           <div className='tracker-home-info-container'>
             <h1 className='tracker-home-title'>
@@ -150,10 +159,19 @@ export const TrackerHome: React.FC<TrackerHomeProps> = ({ token }) => {
             ) : null}
           </Row>
           <div>
-            <Button className='settings-button'>
+            <Button className='settings-button' onClick={() => openSettings()}>
               <FontAwesomeIcon icon={faCog} className='settings-icon' />
             </Button>
           </div>
+        </>
+      ) : currentTracker && settings === true ? (
+        <>
+          <TrackerSettings
+            token={token}
+            tracker={currentTracker}
+            closeSettings={closeSettings}
+            id={currentTracker.tracker_id}
+          />
         </>
       ) : (
         <ClipLoader />

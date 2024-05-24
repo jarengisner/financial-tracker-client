@@ -18,6 +18,8 @@ import { TrackerHome } from '../tracker-home/TrackerHome';
 import { TrackerItem } from '../tracker-list/tracker-list-types';
 import { Goals } from '../tracker-goals/Goals';
 import { Daily } from '../tracker-daily/Daily';
+import { Settings } from '../settings-component/Settings';
+import { TrackerSettings } from '../tracker-settings/TrackerSettings';
 
 export const MainView: React.FC = () => {
   //User related state
@@ -135,6 +137,7 @@ export const MainView: React.FC = () => {
               )
             }
           />
+          {/* will need to pass token to all the following */}
           <Route
             path='/goals'
             element={user && token ? <Goals /> : <Navigate to='/login' />}
@@ -142,6 +145,10 @@ export const MainView: React.FC = () => {
           <Route
             path='/daily'
             element={user && token ? <Daily /> : <Navigate to='/login' />}
+          />
+          <Route
+            path='/settings'
+            element={user && token ? <Settings /> : <Navigate to='/login' />}
           />
         </Routes>
       </Row>

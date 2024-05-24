@@ -1,11 +1,11 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
 
-export const Goals: React.FC = () => {
+export const Settings: React.FC = () => {
   return (
     <Col md={10}>
       <div>
-        <h1>This is the goals page</h1>
+        <h1>Settings</h1>
       </div>
     </Col>
   );

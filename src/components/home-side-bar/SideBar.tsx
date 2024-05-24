@@ -44,7 +44,7 @@ export const SideBar: React.FC<sideBarOpenedProps> = ({ closeSideBar }) => {
         </Link>
       </Row>
       <Row>
-        <Link to=''>
+        <Link to='/daily'>
           <div className='home-button-container'>
             <button className='home-menu-button' data-testid='homeButton'>
               <FontAwesomeIcon icon={faSun} className='home-menu-icon' />
@@ -53,7 +53,7 @@ export const SideBar: React.FC<sideBarOpenedProps> = ({ closeSideBar }) => {
         </Link>
       </Row>
       <Row>
-        <Link to=''>
+        <Link to='/goals'>
           <div className='home-button-container'>
             <button className='home-menu-button' data-testid='homeButton'>
               <FontAwesomeIcon icon={faLightbulb} className='home-menu-icon' />
@@ -62,11 +62,13 @@ export const SideBar: React.FC<sideBarOpenedProps> = ({ closeSideBar }) => {
         </Link>
       </Row>
       <Row>
-        <div className='settings-button-container'>
-          <button className='settings-menu-button'>
-            <FontAwesomeIcon icon={faGear} className='settings-menu-icon' />
-          </button>
-        </div>
+        <Link to='/settings'>
+          <div className='settings-button-container'>
+            <button className='settings-menu-button'>
+              <FontAwesomeIcon icon={faGear} className='settings-menu-icon' />
+            </button>
+          </div>
+        </Link>
       </Row>
     </div>
   );
