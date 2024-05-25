@@ -102,3 +102,29 @@ nice white grey(text) - D3D9D4
   display: flex;
   flex-direction: column;
 }
+
+/* tracker editing form styling below */
+
+.tracker-edit-label {
+  color: #d3d9d4;
+  margin-bottom: 1%;
+}
+
+.tracker-edit-input {
+  margin-bottom: 1%;
+}
+
+.tracker-edit-input {
+  width: 33%;
+  height: 4vh;
+  border: none;
+  border-radius: 10px;
+}
+
+.tracker-edit-switch {
+  margin-bottom: 1%;
+}
+
+.submit-edits-button {
+  margin-bottom: 1%;
+}

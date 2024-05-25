@@ -15,20 +15,65 @@ export const TrackerEdit: React.FC<TrackerEditingProps> = ({ tracker }) => {
   const [newNeedsGoal, setNewNeedsGoal] = useState<number>(0);
   const [newWantsGoal, setNewWantsGoal] = useState<number>(0);
   const [isMonthly, setIsMonthly] = useState<boolean>(false);
-  const [isYearly, setIsYEarly] = useState<boolean>(false);
+  const [isYearly, setIsYearly] = useState<boolean>(false);
+
+  const yearlyCheckHandle = (): void => {
+    setIsYearly(true);
+    setIsMonthly(false);
+  };
+
+  const monthlyCheckHandler = (): void => {
+    setIsMonthly(true);
+    setIsYearly(false);
+  };
 
   return (
     <div>
-      <h2>Tracker Name</h2>
-      <input type='text' placeholder={tracker.tracker_name} />
-      <h2>Savings Goal</h2>
-      <input type='number' placeholder='Enter your new Savings Goal' />
-      <h2>Wants Goal</h2>
-      <input type='number' placeholder='Enter your new Wants Goal' />
-      <h2>Needs Goal</h2>
-      <input type='number' placeholder='Enter your new Needs Goal' />
-      <h2>Monthly or Yearly</h2>
-      <Form.Check type='switch' />
+      <h2 className='tracker-edit-label'>Tracker Name</h2>
+      <input
+        type='text'
+        placeholder={tracker.tracker_name}
+        id='tracker-name-id'
+        className='tracker-edit-input'
+      />
+      <h2 className='tracker-edit-label'>Savings Goal</h2>
+      <input
+        type='number'
+        placeholder='Enter your new Savings Goal'
+        id='tracker-savings-goal-id'
+        className='tracker-edit-input'
+      />
+      <h2 className='tracker-edit-label'>Wants Goal</h2>
+      <input
+        type='number'
+        placeholder='Enter your new Wants Goal'
+        id='tracker-wants-goal-id'
+        className='tracker-edit-input'
+      />
+      <h2 className='tracker-edit-label'>Needs Goal</h2>
+      <input
+        type='number'
+        placeholder='Enter your new Needs Goal'
+        id='tracker-needs-goal-id'
+        className='tracker-edit-input'
+      />
+      <h2 className='tracker-edit-label'>Yearly</h2>
+      <Form.Check
+        type='switch'
+        checked={isYearly}
+        onChange={yearlyCheckHandle}
+        id='year-switch'
+        className='tracker-edit-switch'
+      />
+      <h2 className='tracker-edit-label'>Monthly</h2>
+      <Form.Check
+        type='switch'
+        checked={isMonthly}
+        onChange={monthlyCheckHandler}
+        id='month-switch'
+        className='tracker-edit-switch'
+      />
+      <Button className='submit-edits-button'>Submit</Button>
     </div>
   );
 };
