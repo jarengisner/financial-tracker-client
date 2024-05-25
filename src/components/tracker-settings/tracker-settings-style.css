@@ -1,0 +1,104 @@
+/*
+main background color - #212A31
+gray highlights - #2E3944
+nice blue - 124E66
+grey blue - #748D92
+nice white grey(text) - D3D9D4
+*/
+.delete-button-container {
+  display: flex;
+  flex-direction: row;
+  border: 2px solid #dc3545;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+}
+
+.delete-text,
+.edit-tracker-text {
+  color: #d3d9d4;
+  font-size: large;
+  margin-top: 1%;
+  margin-left: 2%;
+}
+
+.delete-button,
+.edit-tracker-button {
+  margin-right: 2%;
+}
+
+.delete-warning-message {
+  color: #dc3545;
+}
+
+.settings-title-info-outer {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+
+.settings-title-info-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: start;
+}
+
+.settings-title {
+  color: #d3d9d4;
+}
+
+.tracker-name-title {
+  margin-bottom: 8%;
+}
+
+.settings-back-button {
+  background-color: #212a31;
+  border: none;
+  font-size: xx-large;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.settings-back-button:hover {
+  background-color: #212a31;
+  border: none;
+  font-size: xx-large;
+  opacity: 1;
+}
+
+.back-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: start;
+  margin-bottom: 2%;
+  margin-top: 0.75%;
+}
+
+.edit-tracker-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid #0d6efd;
+  border-radius: 10px;
+  margin-bottom: 2%;
+}
+
+.edit-tracker-container-open {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 2%;
+}
+
+.tracker-open-container {
+  border: 2px solid #0d6efd;
+  border-radius: 10px;
+  margin-bottom: 2%;
+  display: flex;
+  flex-direction: column;
+}
