@@ -1,0 +1,36 @@
+/*
+main background color - #212A31
+gray highlights - #2E3944
+nice blue - 124E66
+grey blue - #748D92
+nice white grey(text) - D3D9D4
+*/
+
+.drop-down-title {
+  color: #d3d9d4;
+  font-family: Poppins, sans-serif;
+}
+
+.goals-title-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  margin-top: 1.2%;
+}
+
+.goals-title {
+  color: #d3d9d4;
+  font-family: Poppins, sans-serif;
+}
+
+.tracker-selector-outer-container {
+  margin-top: 1.5%;
+}
+
+#drop-down-main {
+  color: black;
+  background-color: #d3d9d4;
+  border: none;
+  width: 33%;
+}

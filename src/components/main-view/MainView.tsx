@@ -140,7 +140,13 @@ export const MainView: React.FC = () => {
           {/* will need to pass token to all the following */}
           <Route
             path='/goals'
-            element={user && token ? <Goals /> : <Navigate to='/login' />}
+            element={
+              user && token ? (
+                <Goals user={user} token={token} />
+              ) : (
+                <Navigate to='/login' />
+              )
+            }
           />
           <Route
             path='/daily'
