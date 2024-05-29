@@ -67,7 +67,7 @@ export const SideBar: React.FC<sideBarOpenedProps> = ({ closeSideBar }) => {
                 <Tooltip className='side-bar-tooltip'>Daily Entries</Tooltip>
               }
             >
-              <button className='daily-menu-button' data-testid='homeButton'>
+              <button className='daily-menu-button' data-testid='dailyButton'>
                 <FontAwesomeIcon icon={faSun} className='daily-menu-icon' />
               </button>
             </OverlayTrigger>
@@ -84,7 +84,7 @@ export const SideBar: React.FC<sideBarOpenedProps> = ({ closeSideBar }) => {
                 <Tooltip className='side-bar-tooltip'>Goal Entries</Tooltip>
               }
             >
-              <button className='goal-menu-button' data-testid='homeButton'>
+              <button className='goal-menu-button' data-testid='goalButton'>
                 <FontAwesomeIcon
                   icon={faLightbulb}
                   className='goal-menu-icon'
@@ -102,7 +102,10 @@ export const SideBar: React.FC<sideBarOpenedProps> = ({ closeSideBar }) => {
               trigger='hover'
               overlay={<Tooltip className='side-bar-tooltip'>Settings</Tooltip>}
             >
-              <button className='settings-menu-button'>
+              <button
+                className='settings-menu-button'
+                data-testid='settingsButton'
+              >
                 <FontAwesomeIcon icon={faGear} className='settings-menu-icon' />
               </button>
             </OverlayTrigger>
