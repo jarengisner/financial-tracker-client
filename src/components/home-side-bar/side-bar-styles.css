@@ -23,7 +23,9 @@
 
 .close-menu-button,
 .home-menu-button,
-.settings-menu-button {
+.settings-menu-button,
+.daily-menu-button,
+.goal-menu-button {
   width: 50%;
   background-color: #124e66;
   border: none;
@@ -35,11 +37,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.home-menu-icon {
-  font-size: xx-large;
-  color: #d3d9d4;
 }
 
 .icon-container {
@@ -57,23 +54,44 @@
   margin-bottom: 10%;
 }
 
-.close-menu-button {
-  color: #d3d9d4;
-  font-size: xx-large;
-  transition: color 0.5s ease;
-}
-.close-menu-button:hover {
+.close-menu-button:hover,
+.goal-menu-button:focus {
   color: #ff5151;
   font-size: xx-large;
 }
 
-.settings-menu-button {
+.settings-menu-button,
+.close-menu-button,
+.daily-menu-button,
+.goal-menu-button,
+.home-menu-button {
   color: #d3d9d4;
   font-size: xx-large;
   transition: color 0.5s ease;
 }
 
-.settings-menu-button:hover {
+.settings-menu-button:hover,
+.settings-menu-button:focus {
   color: #ff7f50;
   font-size: xx-large;
+}
+
+.daily-menu-button:hover,
+.daily-menu-button:focus {
+  color: #f9f777;
+}
+
+.goal-menu-button:hover,
+.goal-menu-button:focus {
+  color: #95bf44;
+}
+
+.home-menu-button:hover,
+.home-menu-button:focus {
+  color: #f091e4;
+}
+
+.tooltip-inner {
+  background-color: #d3d9d4;
+  color: black;
 }

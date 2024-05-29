@@ -1,4 +1,4 @@
-import { Row } from 'react-bootstrap';
+import { OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
 import { stateManipulationFunction } from '../../types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -22,51 +22,90 @@ export const SideBar: React.FC<sideBarOpenedProps> = ({ closeSideBar }) => {
     <div className='icon-container'>
       <Row>
         <div className='close-button-container'>
-          <button
-            className='close-menu-button'
-            data-testid='closeSideBarButton'
+          <OverlayTrigger
+            placement='bottom'
+            trigger='hover'
+            overlay={<Tooltip className='side-bar-tooltip'>Close Menu</Tooltip>}
           >
-            <FontAwesomeIcon
-              icon={faCircleXmark}
-              className='close-menu-icon'
-              onClick={() => closeSideBar()}
-            />
-          </button>
+            <button
+              className='close-menu-button'
+              data-testid='closeSideBarButton'
+            >
+              <FontAwesomeIcon
+                icon={faCircleXmark}
+                className='close-menu-icon'
+                onClick={() => closeSideBar()}
+              />
+            </button>
+          </OverlayTrigger>
         </div>
       </Row>
       <Row>
         <Link to='/'>
           <div className='home-button-container'>
-            <button className='home-menu-button' data-testid='homeButton'>
-              <FontAwesomeIcon icon={faHouse} className='home-menu-icon' />
-            </button>
+            <OverlayTrigger
+              placement='bottom'
+              trigger='hover'
+              overlay={
+                <Tooltip className='side-bar-tooltip'>Home Menu</Tooltip>
+              }
+            >
+              <button className='home-menu-button' data-testid='homeButton'>
+                <FontAwesomeIcon icon={faHouse} className='home-menu-icon' />
+              </button>
+            </OverlayTrigger>
           </div>
         </Link>
       </Row>
       <Row>
         <Link to='/daily'>
           <div className='home-button-container'>
-            <button className='home-menu-button' data-testid='homeButton'>
-              <FontAwesomeIcon icon={faSun} className='home-menu-icon' />
-            </button>
+            <OverlayTrigger
+              placement='bottom'
+              trigger='hover'
+              overlay={
+                <Tooltip className='side-bar-tooltip'>Daily Entries</Tooltip>
+              }
+            >
+              <button className='daily-menu-button' data-testid='homeButton'>
+                <FontAwesomeIcon icon={faSun} className='daily-menu-icon' />
+              </button>
+            </OverlayTrigger>
           </div>
         </Link>
       </Row>
       <Row>
         <Link to='/goals'>
           <div className='home-button-container'>
-            <button className='home-menu-button' data-testid='homeButton'>
-              <FontAwesomeIcon icon={faLightbulb} className='home-menu-icon' />
-            </button>
+            <OverlayTrigger
+              trigger='hover'
+              placement='bottom'
+              overlay={
+                <Tooltip className='side-bar-tooltip'>Goal Entries</Tooltip>
+              }
+            >
+              <button className='goal-menu-button' data-testid='homeButton'>
+                <FontAwesomeIcon
+                  icon={faLightbulb}
+                  className='goal-menu-icon'
+                />
+              </button>
+            </OverlayTrigger>
           </div>
         </Link>
       </Row>
       <Row>
         <Link to='/settings'>
           <div className='settings-button-container'>
-            <button className='settings-menu-button'>
-              <FontAwesomeIcon icon={faGear} className='settings-menu-icon' />
-            </button>
+            <OverlayTrigger
+              placement='bottom'
+              trigger='hover'
+              overlay={<Tooltip className='side-bar-tooltip'>Settings</Tooltip>}
+            >
+              <button className='settings-menu-button'>
+                <FontAwesomeIcon icon={faGear} className='settings-menu-icon' />
+              </button>
+            </OverlayTrigger>
           </div>
         </Link>
       </Row>
