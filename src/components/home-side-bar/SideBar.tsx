@@ -98,7 +98,7 @@ export const SideBar: React.FC<sideBarOpenedProps> = ({ closeSideBar }) => {
         <Link to='/settings'>
           <div className='settings-button-container'>
             <OverlayTrigger
-              placement='bottom'
+              placement='top'
               trigger='hover'
               overlay={<Tooltip className='side-bar-tooltip'>Settings</Tooltip>}
             >

@@ -11,3 +11,12 @@ export type stateManipulationFunction = () => void;
 export type loginStateManipulation = (arg: loginHandleObject) => void;
 
 export type trackerTransportFunction = (arg: TrackerItem) => void;
+
+export interface trackerUpdateObject {
+  tracker_name: string;
+  savings_goal: number;
+  needs_goal: number;
+  wants_goal: number;
+  year: boolean;
+  month: boolean;
+}

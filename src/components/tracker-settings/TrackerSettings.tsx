@@ -13,6 +13,7 @@ import '../tracker-settings/tracker-settings-style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { TrackerEdit } from './TrackerEdit';
+import { useNavigate } from 'react-router-dom';
 
 interface TrackerSettingsProps {
   token: string;
@@ -29,6 +30,8 @@ export const TrackerSettings: React.FC<TrackerSettingsProps> = ({
 }) => {
   const [thisTracker, setThisTracker] = useState<TrackerItem | null>();
   const [editorOpen, setEditorOpen] = useState<boolean>(false);
+  const [deleteMessage, setDeleteMessage] = useState<string>('');
+  const navigate = useNavigate();
 
   const backHandler = (): void => {
     closeSettings();
@@ -45,6 +48,27 @@ export const TrackerSettings: React.FC<TrackerSettingsProps> = ({
   useEffect(() => {
     setThisTracker(tracker);
   }, [tracker]);
+
+  const deleteHandler = (): void => {
+    fetch(`http://localhost:8080/trackers/delete/${tracker.tracker_id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((message) => {
+        setDeleteMessage('Successfully deleted group');
+        navigate('/');
+      })
+      .catch((err) => {
+        console.log(err);
+        setDeleteMessage(
+          'Failed to delete the Tracker, please try again later'
+        );
+      });
+  };
 
   return (
     <Col>
@@ -79,7 +103,7 @@ export const TrackerSettings: React.FC<TrackerSettingsProps> = ({
                   Close Editor
                 </Button>
               </div>
-              <TrackerEdit tracker={tracker} />
+              <TrackerEdit tracker={tracker} token={token} />
             </div>
           ) : (
             <div className='edit-tracker-container'>
@@ -101,7 +125,11 @@ export const TrackerSettings: React.FC<TrackerSettingsProps> = ({
                 Warning: this is a permanent action
               </span>
             </p>
-            <Button variant='danger' className='delete-button'>
+            <Button
+              variant='danger'
+              className='delete-button'
+              onClick={deleteHandler}
+            >
               Delete Tracker
             </Button>
           </div>

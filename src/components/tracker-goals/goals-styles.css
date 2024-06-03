@@ -34,3 +34,36 @@ nice white grey(text) - D3D9D4
   border: none;
   width: 33%;
 }
+
+.goals-page-card {
+  background-color: #d3d9d4;
+  color: black;
+}
+
+.goals-page-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.goal-card-row {
+  margin-top: 2%;
+  margin-left: 0.5%;
+}
+
+.goal-card-button {
+  background-color: #d3d9d4;
+  color: #124e66;
+  opacity: 0.7;
+  font-size: xx-large;
+  border: none;
+  transition: opacity 0.3s ease;
+}
+
+.goal-card-button:hover {
+  background-color: #d3d9d4;
+  color: #124e66;
+  opacity: 1;
+  font-size: xx-large;
+  border: none;
+}
