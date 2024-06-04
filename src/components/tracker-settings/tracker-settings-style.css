@@ -128,3 +128,38 @@ nice white grey(text) - D3D9D4
 .submit-edits-button {
   margin-bottom: 1%;
 }
+
+.successful-message-card,
+.failed-message-card {
+  margin-right: 4%;
+  margin-left: 4%;
+  margin-bottom: 1%;
+  margin-top: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #212a31;
+}
+
+.success-message-card-text,
+.failed-message-card-text {
+  font-size: large;
+  font-family: Poppins, sans-serif;
+  margin-top: 1%;
+}
+
+.successful-message-card {
+  border-color: rgb(66, 168, 66);
+}
+
+.success-message-card-text {
+  color: rgb(66, 168, 66);
+}
+
+.failed-message-card {
+  border-color: #dc3545;
+}
+
+.failed-message-card-text {
+  color: #dc3545;
+}

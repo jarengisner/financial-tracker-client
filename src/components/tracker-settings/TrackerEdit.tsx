@@ -3,8 +3,11 @@ import React, { useEffect, useState } from 'react';
 //styles
 import '../tracker-settings/tracker-settings-style.css';
 import { TrackerItem } from '../tracker-list/tracker-list-types';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Card, Form } from 'react-bootstrap';
 import { trackerUpdateObject } from '../../types';
+
+import { ClipLoader } from 'react-spinners';
+import { StatusMessage } from './StatusMessage';
 
 interface TrackerEditingProps {
   tracker: TrackerItem;
@@ -25,7 +28,12 @@ export const TrackerEdit: React.FC<TrackerEditingProps> = ({
   const [newWantsGoal, setNewWantsGoal] = useState<number>(tracker.wants_goal);
   const [isMonthly, setIsMonthly] = useState<boolean>(tracker.month);
   const [isYearly, setIsYearly] = useState<boolean>(tracker.year);
+
+  //edit success relevant state
   const [message, setMessage] = useState<string>('');
+  const [sending, setSending] = useState<boolean>(false);
+  const [editComplete, setEditComplete] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(false);
 
   const yearlyCheckHandle = (): void => {
     setIsYearly(true);
@@ -38,6 +46,7 @@ export const TrackerEdit: React.FC<TrackerEditingProps> = ({
   };
 
   const submitHandle = (): void => {
+    setSending(true);
     const id = tracker.tracker_id;
 
     const data: trackerUpdateObject = {
@@ -61,10 +70,16 @@ export const TrackerEdit: React.FC<TrackerEditingProps> = ({
       .then((d) => {
         console.log(d);
         setMessage('Successfully Edited Tracker');
+        setSending(false);
+        setEditComplete(true);
+        setSuccess(true);
       })
       .catch((e) => {
         console.log(e);
         setMessage('Failed to alter Tracker, please try again later');
+        setSending(false);
+        setEditComplete(true);
+        setSuccess(false);
       });
   };
 
@@ -118,9 +133,16 @@ export const TrackerEdit: React.FC<TrackerEditingProps> = ({
         id='month-switch'
         className='tracker-edit-switch'
       />
-      <Button className='submit-edits-button' onClick={submitHandle}>
-        Submit
-      </Button>
+      {editComplete ? (
+        <StatusMessage message={message} success={success} />
+      ) : null}
+      {sending ? (
+        <ClipLoader color='#d3d9d4' />
+      ) : (
+        <Button className='submit-edits-button' onClick={submitHandle}>
+          Submit
+        </Button>
+      )}
     </div>
   );
 };
