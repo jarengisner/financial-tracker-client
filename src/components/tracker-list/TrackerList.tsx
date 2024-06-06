@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { User, listUser } from './tracker-list-types';
 import { Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChartSimple } from '@fortawesome/free-solid-svg-icons';
+import { faChartSimple, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TrackerItem } from './tracker-list-types';
 
 //stylesheet
@@ -64,6 +64,13 @@ export const TrackerList: React.FC<TrackerComponentProps> = ({
 
   return (
     <div className='list-container'>
+      <Card className='tracker-card add-tracker-card'>
+        <div className='add-tracker-inner-container'>
+          <button className='add-tracker-button'>
+            <FontAwesomeIcon icon={faPlus} className='add-tracker-icon' />
+          </button>
+        </div>
+      </Card>
       {usersTrackers.length > 0 ? (
         usersTrackers.map((tracker) => (
           <Card className='tracker-card' key={tracker.tracker_id}>

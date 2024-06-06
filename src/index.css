@@ -7,7 +7,13 @@ nice white grey(text) - D3D9D4
 */
 
 body {
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
   background-color: #212a31;
+}
+
+body,
+html {
+  box-sizing: border-box;
+  height: 100%;
 }
