@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { User, listUser } from './tracker-list-types';
-import { Card } from 'react-bootstrap';
+import { Card, Modal, Form, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChartSimple, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faChartSimple, faPlus, faX } from '@fortawesome/free-solid-svg-icons';
 import { TrackerItem } from './tracker-list-types';
 
 //stylesheet
@@ -20,6 +20,14 @@ export const TrackerList: React.FC<TrackerComponentProps> = ({
   token,
 }) => {
   const [usersTrackers, setUsersTrackers] = useState<TrackerItem[]>([]);
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+  const [newTrackerName, setNewTrackerName] = useState<string>('');
+  const [isMonthly, setIsMonthly] = useState<boolean>(false);
+  const [isYearly, setIsYearly] = useState<boolean>(true);
+  const [newSavingsGoal, setNewSavingsGoal] = useState<number>(0);
+  const [newWantsGoal, setNewWantsGoal] = useState<number>(0);
+  const [newNeedsGoal, setNewNeedsGoal] = useState<number>(0);
 
   //************************************************************************************************************************************************************************************ */
   useEffect(() => {
@@ -62,45 +70,147 @@ export const TrackerList: React.FC<TrackerComponentProps> = ({
     fetchData();
   }, [user, token]);
 
+  const modalOpenHandler = (): void => {
+    setShowModal(true);
+  };
+
+  const modalCloseHandler = (): void => {
+    setShowModal(false);
+  };
+
+  const yearlyCheckHandle = (): void => {
+    setIsYearly(true);
+    setIsMonthly(false);
+  };
+
+  const monthlyCheckHandle = (): void => {
+    setIsMonthly(true);
+    setIsYearly(false);
+  };
+
   return (
-    <div className='list-container'>
-      <Card className='tracker-card add-tracker-card'>
-        <div className='add-tracker-inner-container'>
-          <button className='add-tracker-button'>
-            <FontAwesomeIcon icon={faPlus} className='add-tracker-icon' />
+    <>
+      <Modal
+        show={showModal}
+        className="create-tracker-modal"
+        size="lg"
+        centered
+      >
+        <div className="create-modal-header-container">
+          <h1 className="create-tracker-modal-title">Create Tracker</h1>
+          <button
+            onClick={() => modalCloseHandler()}
+            className="create-tracker-close-button"
+          >
+            <FontAwesomeIcon icon={faX} />
           </button>
         </div>
-      </Card>
-      {usersTrackers.length > 0 ? (
-        usersTrackers.map((tracker) => (
-          <Card className='tracker-card' key={tracker.tracker_id}>
-            <div className='tracker-card-info-container'>
-              <div className='tracker-title-container'>
-                <Card.Title className='tracker-card-title'>
-                  {tracker.tracker_name}
-                </Card.Title>
-                {tracker.year ? (
-                  <p className='year-or-month'>Yearly</p>
-                ) : (
-                  <p className='year-or-month'>Monthly</p>
-                )}
+        <div className="create-tracker-form-container">
+          <div className="form-section name-section">
+            <h3 className="create-tracker-input-title">Tracker Name</h3>
+            <input
+              type="text"
+              placeholder="Name"
+              className="create-tracker-text-input"
+            />
+          </div>
+          <div className="form-section">
+            <h3 className="create-tracker-input-title">Yearly</h3>
+            <Form.Check
+              type="switch"
+              id="yearly-check"
+              className="create-tracker-length-switch"
+              checked={isYearly}
+              onChange={() => yearlyCheckHandle()}
+            />
+            <h3 className="create-tracker-input-title">Monthly</h3>
+            <Form.Check
+              type="switch"
+              id="monthly-check"
+              className="create-tracker-length-switch"
+              checked={isMonthly}
+              onChange={() => monthlyCheckHandle()}
+            />
+          </div>
+          <div className="form-section last-section">
+            <h3 className="create-tracker-input-title">Savings Goal</h3>
+            <p className="create-tracker-explanation-text">
+              Your savings goal is simple. It is purely how much you want to
+              save, nothing more.
+            </p>
+            <input
+              type="number"
+              placeholder="Enter a number"
+              className="create-tracker-text-input"
+            />
+            <h3 className="create-tracker-input-title">Wants Goal</h3>
+            <p className="create-tracker-explanation-text">
+              Your wants goal is the maximum amount of money you want to spend
+              on things that you WANT within this time period.
+            </p>
+            <input
+              type="number"
+              placeholder="Enter a number"
+              className="create-tracker-text-input"
+            />
+            <h3 className="create-tracker-input-title">Needs Goal</h3>
+            <p className="create-tracker-explanation-text">
+              Your needs goal is going to be your spending goal for things that
+              you NEED to spend money on. For this category, think groceries,
+              gas, or other necessities that you have some sort of control over
+              the total.
+            </p>
+            <input
+              type="number"
+              placeholder="Enter a number"
+              className="create-tracker-text-input bottom-input"
+            />
+          </div>
+        </div>
+        <Button>Submit</Button>
+      </Modal>
+      <div className="list-container">
+        <Card className="tracker-card add-tracker-card">
+          <div className="add-tracker-inner-container">
+            <button
+              className="add-tracker-button"
+              onClick={() => modalOpenHandler()}
+            >
+              <FontAwesomeIcon icon={faPlus} className="add-tracker-icon" />
+            </button>
+          </div>
+        </Card>
+        {usersTrackers.length > 0 ? (
+          usersTrackers.map((tracker) => (
+            <Card className="tracker-card" key={tracker.tracker_id}>
+              <div className="tracker-card-info-container">
+                <div className="tracker-title-container">
+                  <Card.Title className="tracker-card-title">
+                    {tracker.tracker_name}
+                  </Card.Title>
+                  {tracker.year ? (
+                    <p className="year-or-month">Yearly</p>
+                  ) : (
+                    <p className="year-or-month">Monthly</p>
+                  )}
+                </div>
+                <div className="enter-tracker-view-container">
+                  <Link to={`trackers/${tracker.tracker_id}`}>
+                    <button className="enter-tracker-view-button">
+                      <FontAwesomeIcon
+                        icon={faChartSimple}
+                        className="enter-tracker-view-icon"
+                      />
+                    </button>
+                  </Link>
+                </div>
               </div>
-              <div className='enter-tracker-view-container'>
-                <Link to={`trackers/${tracker.tracker_id}`}>
-                  <button className='enter-tracker-view-button'>
-                    <FontAwesomeIcon
-                      icon={faChartSimple}
-                      className='enter-tracker-view-icon'
-                    />
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </Card>
-        ))
-      ) : (
-        <p style={{ color: 'white' }}>No trackers have been found</p>
-      )}
-    </div>
+            </Card>
+          ))
+        ) : (
+          <p style={{ color: 'white' }}>No trackers have been found</p>
+        )}
+      </div>
+    </>
   );
 };
