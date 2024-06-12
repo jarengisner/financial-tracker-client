@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { User, listUser } from './tracker-list-types';
+import { User, listUser, newTracker } from './tracker-list-types';
 import { Card, Modal, Form, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartSimple, faPlus, faX } from '@fortawesome/free-solid-svg-icons';
@@ -88,6 +88,30 @@ export const TrackerList: React.FC<TrackerComponentProps> = ({
     setIsYearly(false);
   };
 
+  const submitNewTrackerHandle = (): void => {
+    const newTrackerData: newTracker = {
+      user_id: user.id,
+      tracker_name: newTrackerName,
+      savings_goal: newSavingsGoal,
+      wants_goal: newWantsGoal,
+      needs_goal: newNeedsGoal,
+      year: isYearly,
+      month: isMonthly,
+    };
+    fetch(`http://localhost:8080/trackers`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(newTrackerData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
+
   return (
     <>
       <Modal
@@ -112,6 +136,7 @@ export const TrackerList: React.FC<TrackerComponentProps> = ({
               type="text"
               placeholder="Name"
               className="create-tracker-text-input"
+              onChange={(e) => setNewTrackerName(e.target.value)}
             />
           </div>
           <div className="form-section">
@@ -142,6 +167,7 @@ export const TrackerList: React.FC<TrackerComponentProps> = ({
               type="number"
               placeholder="Enter a number"
               className="create-tracker-text-input"
+              onChange={(e) => setNewSavingsGoal(Number(e.target.value))}
             />
             <h3 className="create-tracker-input-title">Wants Goal</h3>
             <p className="create-tracker-explanation-text">
@@ -152,6 +178,9 @@ export const TrackerList: React.FC<TrackerComponentProps> = ({
               type="number"
               placeholder="Enter a number"
               className="create-tracker-text-input"
+              onChange={(e) => {
+                setNewWantsGoal(Number(e.target.value));
+              }}
             />
             <h3 className="create-tracker-input-title">Needs Goal</h3>
             <p className="create-tracker-explanation-text">
@@ -164,10 +193,16 @@ export const TrackerList: React.FC<TrackerComponentProps> = ({
               type="number"
               placeholder="Enter a number"
               className="create-tracker-text-input bottom-input"
+              onChange={(e) => setNewNeedsGoal(Number(e.target.value))}
             />
           </div>
         </div>
-        <Button className="create-tracker-submit-button">Submit</Button>
+        <Button
+          className="create-tracker-submit-button"
+          onClick={() => submitNewTrackerHandle()}
+        >
+          Submit
+        </Button>
       </Modal>
       <div className="list-container">
         <Card className="tracker-card add-tracker-card">
