@@ -81,23 +81,26 @@ nice white grey(text) - D3D9D4
 }
 
 .modal-content {
-  background-color: #124e66;
-  color: #d3d9d4;
+  background-color: #748d92;
+  color: black;
+  font-family: Poppins, sans-serif;
 }
 
 .create-tracker-close-button {
-  background-color: #124e66;
+  background-color: #748d92;
   border: none;
   color: #d3d9d4;
   font-size: x-large;
   transition: color 0.3s ease;
+  margin-right: 1%;
 }
 
 .create-tracker-close-button:hover {
-  background-color: #124e66;
+  background-color: #748d92;
   border: none;
   color: #dc3545;
   font-size: x-large;
+  margin-right: 1%;
 }
 
 .create-modal-header-container {
@@ -150,4 +153,17 @@ nice white grey(text) - D3D9D4
 
 .name-section {
   width: 100%;
+}
+
+.create-tracker-submit-button {
+  background-color: #124e66;
+  border: none;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.create-tracker-submit-button:hover {
+  background-color: #124e66;
+  border: none;
+  opacity: 0.8;
 }

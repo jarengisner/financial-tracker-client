@@ -97,7 +97,7 @@ export const TrackerList: React.FC<TrackerComponentProps> = ({
         centered
       >
         <div className="create-modal-header-container">
-          <h1 className="create-tracker-modal-title">Create Tracker</h1>
+          <h1 className="create-tracker-modal-title">Add Tracker</h1>
           <button
             onClick={() => modalCloseHandler()}
             className="create-tracker-close-button"
@@ -167,7 +167,7 @@ export const TrackerList: React.FC<TrackerComponentProps> = ({
             />
           </div>
         </div>
-        <Button>Submit</Button>
+        <Button className="create-tracker-submit-button">Submit</Button>
       </Modal>
       <div className="list-container">
         <Card className="tracker-card add-tracker-card">
