@@ -108,7 +108,8 @@ export const TrackerList: React.FC<TrackerComponentProps> = ({
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        setUsersTrackers((previousTrackers) => [...previousTrackers, data]);
+        modalCloseHandler();
       });
   };
 

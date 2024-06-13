@@ -167,3 +167,11 @@ nice white grey(text) - D3D9D4
   border: none;
   opacity: 0.8;
 }
+
+.add-tracker-card {
+  margin-bottom: 1%;
+}
+
+.tracker-card {
+  margin-bottom: 1%;
+}
