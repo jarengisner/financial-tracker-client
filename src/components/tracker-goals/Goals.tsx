@@ -10,6 +10,7 @@ import './goals-styles.css';
 import { Goal } from '../tracker-home/tracker-home-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { GoalEditModal } from './GoalEditModal';
 
 interface GoalProps {
   user: listUser;
@@ -25,6 +26,11 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
   );
 
   const [activeGoals, setActiveGoals] = useState<Goal[]>([]);
+
+  //state for showing different modals depending on which action is selected on the page
+  const [showAddModal, setShowAddModal] = useState<boolean>(false);
+  const [showEditModal, setShowEditModal] = useState<boolean>(false);
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 
   useEffect(() => {
     const userId: number = user.id;
@@ -83,43 +89,70 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
     setActiveGoals([]);
   };
 
+  //state manipulation to show modals or close modals
+  const toggleAddModal = (): void => {
+    setShowAddModal(!showAddModal);
+  };
+
+  const toggleEditModal = (): void => {
+    setShowEditModal(!showEditModal);
+  };
+
+  const toggleDeleteModal = (): void => {
+    setShowDeleteModal(!showDeleteModal);
+  };
+
   return (
-    <Col md={10}>
-      <div className='goals-title-container'>
-        <h1 className='goals-title'>Goals</h1>
-      </div>
-      <div>
-        {trackers ? (
-          <TrackerSelector
-            trackers={trackers}
-            sendSelected={sendSelected}
-            setNone={setNone}
-          />
-        ) : (
-          <h1>Not loaded, put spinner</h1>
-        )}
-      </div>
-      <div>
-        {trackers && activeGoals.length > 0
-          ? activeGoals.map((goal) => (
-              <Row key={goal.goal_id} className='goal-card-row'>
-                <Card className='goals-page-card'>
-                  <div className='goals-card-message-container'>
-                    <p className='goal-message'>{goal.message}</p>
-                  </div>
-                  <div className='goals-card-button-container'>
-                    <button className='goal-card-button'>
-                      <FontAwesomeIcon icon={faPenToSquare} />
-                    </button>
-                    <button className='goal-card-button'>
-                      <FontAwesomeIcon icon={faTrash} />
-                    </button>
-                  </div>
-                </Card>
-              </Row>
-            ))
-          : null}
-      </div>
-    </Col>
+    <>
+      {showEditModal && (
+        <GoalEditModal
+          currentTracker={focusedTracker}
+          user={user}
+          token={token}
+          show={showEditModal}
+          toggleEditModal={toggleEditModal}
+        />
+      )}
+      <Col md={10}>
+        <div className="goals-title-container">
+          <h1 className="goals-title">Goals</h1>
+        </div>
+        <div>
+          {trackers ? (
+            <TrackerSelector
+              trackers={trackers}
+              sendSelected={sendSelected}
+              setNone={setNone}
+            />
+          ) : (
+            <h1>Not loaded, put spinner</h1>
+          )}
+        </div>
+        <div>
+          {trackers && activeGoals.length > 0
+            ? activeGoals.map((goal) => (
+                <Row key={goal.goal_id} className="goal-card-row">
+                  <Card className="goals-page-card">
+                    <div className="goals-card-message-container">
+                      <p className="goal-message">{goal.message}</p>
+                    </div>
+                    <div className="goals-card-button-container">
+                      <button
+                        className="goal-card-button"
+                        onClick={() => toggleEditModal()}
+                      >
+                        <FontAwesomeIcon icon={faPenToSquare} />
+                      </button>
+                      <button className="goal-card-button">
+                        <FontAwesomeIcon icon={faTrash} />
+                      </button>
+                    </div>
+                  </Card>
+                </Row>
+              ))
+            : null}
+        </div>
+      </Col>
+    </>
   );
 };
