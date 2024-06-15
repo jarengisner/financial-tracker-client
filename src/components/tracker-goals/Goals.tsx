@@ -3,6 +3,7 @@ import { Card, Col, Row } from 'react-bootstrap';
 import { TrackerItem, listUser } from '../tracker-list/tracker-list-types';
 import { TrackerSelector } from './TrackerSelector';
 
+
 import { useEffect } from 'react';
 
 //style
@@ -10,7 +11,11 @@ import './goals-styles.css';
 import { Goal } from '../tracker-home/tracker-home-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+
+//Modal imports
 import { GoalEditModal } from './GoalEditModal';
+//import {DeleteWarningModal} from './DeleteWarningModal';
+import {AddGoalModal} from './AddGoalModal';
 
 interface GoalProps {
   user: listUser;
@@ -113,6 +118,9 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
           toggleEditModal={toggleEditModal}
         />
       )}
+      {showAddModal && focusedTracker &&(
+      <AddGoalModal currentTracker={focusedTracker} user={user} token={token} show={showAddModal} toggleAddModal={toggleAddModal}/>
+      )}
       <Col md={10}>
         <div className="goals-title-container">
           <h1 className="goals-title">Goals</h1>
@@ -132,6 +140,7 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
           {trackers && activeGoals.length > 0
             ? activeGoals.map((goal) => (
                 <Row key={goal.goal_id} className="goal-card-row">
+                  <button onClick={()=>toggleAddModal()}>Add Goal to this Tracker</button>
                   <Card className="goals-page-card">
                     <div className="goals-card-message-container">
                       <p className="goal-message">{goal.message}</p>

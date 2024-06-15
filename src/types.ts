@@ -20,3 +20,9 @@ export interface trackerUpdateObject {
   year: boolean;
   month: boolean;
 }
+
+
+export interface newGoal{
+  message: string;
+  tracker_id: number;
+};
