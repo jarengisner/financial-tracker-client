@@ -16,6 +16,7 @@ import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { GoalEditModal } from './GoalEditModal';
 //import {DeleteWarningModal} from './DeleteWarningModal';
 import {AddGoalModal} from './AddGoalModal';
+import { DeleteWarningModal } from './DeleteWarningModal';
 
 interface GoalProps {
   user: listUser;
@@ -121,6 +122,11 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
       {showAddModal && focusedTracker &&(
       <AddGoalModal currentTracker={focusedTracker} user={user} token={token} show={showAddModal} toggleAddModal={toggleAddModal}/>
       )}
+      {
+        showDeleteModal && (
+        <DeleteWarningModal />
+        )
+      }
       <Col md={10}>
         <div className="goals-title-container">
           <h1 className="goals-title">Goals</h1>
