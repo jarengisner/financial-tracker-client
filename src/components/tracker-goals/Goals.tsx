@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card, Col, Row, Button} from 'react-bootstrap';
 import { TrackerItem, listUser } from '../tracker-list/tracker-list-types';
 import { TrackerSelector } from './TrackerSelector';
 
@@ -14,9 +14,8 @@ import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 //Modal imports
 import { GoalEditModal } from './GoalEditModal';
-//import {DeleteWarningModal} from './DeleteWarningModal';
 import {AddGoalModal} from './AddGoalModal';
-import { DeleteWarningModal } from './DeleteWarningModal';
+import {DeleteWarningModal} from './DeleteWarningModal';
 
 interface GoalProps {
   user: listUser;
@@ -123,8 +122,8 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
       <AddGoalModal currentTracker={focusedTracker} user={user} token={token} show={showAddModal} toggleAddModal={toggleAddModal}/>
       )}
       {
-        showDeleteModal && (
-        <DeleteWarningModal />
+         showDeleteModal && (
+        <DeleteWarningModal showDeleteModal={showDeleteModal} toggleShowDelete={toggleDeleteModal}/>
         )
       }
       <Col md={10}>
@@ -146,7 +145,9 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
           {trackers && activeGoals.length > 0
             ? activeGoals.map((goal) => (
                 <Row key={goal.goal_id} className="goal-card-row">
-                  <button onClick={()=>toggleAddModal()}>Add Goal to this Tracker</button>
+                <div className='add-button-container'>
+                  <Button onClick={()=>toggleAddModal()} className='add-goal-button'>Add Goal to this Tracker</Button>
+                </div>
                   <Card className="goals-page-card">
                     <div className="goals-card-message-container">
                       <p className="goal-message">{goal.message}</p>
@@ -158,7 +159,7 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
                       >
                         <FontAwesomeIcon icon={faPenToSquare} />
                       </button>
-                      <button className="goal-card-button">
+                      <button className="goal-card-button" onClick={()=>toggleDeleteModal()}>
                         <FontAwesomeIcon icon={faTrash} />
                       </button>
                     </div>

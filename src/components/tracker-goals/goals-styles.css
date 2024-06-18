@@ -67,3 +67,12 @@ nice white grey(text) - D3D9D4
   font-size: xx-large;
   border: none;
 }
+
+.add-goal-button{
+  width: 50%;
+  font-size: x-large;
+  margin-bottom: 1%;
+}
+.add-button-container{
+  align-items: center;
+}

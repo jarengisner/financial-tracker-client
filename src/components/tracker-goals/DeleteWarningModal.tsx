@@ -1,12 +1,20 @@
 import React from 'react';
 import { Modal, Row } from 'react-bootstrap';
+import { stateManipulationFunction } from '../../types';
 
-export const DeleteWarningModal: React.FC = () => {
+
+interface DeleteProps{
+  showDeleteModal: boolean;
+  toggleShowDelete: stateManipulationFunction;
+};
+
+
+export const DeleteWarningModal: React.FC<DeleteProps> = ({showDeleteModal, toggleShowDelete}) => {
   return (
-    <Modal>
+    <Modal show={showDeleteModal}>
       <Row>
         <p>Delete tag title</p>
-        <button>Exit</button>
+        <button onClick={()=>toggleShowDelete()}>Close</button>
       </Row>
       <Row>
         <p>Warning here</p>
