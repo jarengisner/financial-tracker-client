@@ -3,6 +3,8 @@ import { Modal, Row } from 'react-bootstrap';
 import { TrackerItem, listUser } from '../tracker-list/tracker-list-types';
 import { stateManipulationFunction, newGoal } from '../../types';
 
+import './goals-styles.css';
+
 
 
 interface addGoalProps {
@@ -51,19 +53,22 @@ export const AddGoalModal: React.FC<addGoalProps> = ({
   return (
     <>
       {currentTracker && (
-    <Modal show={show}>
-      <Row className='add-goal-title-section'>
+    <Modal show={show} className='add-goal-modal' size='lg' centered>
+    <Modal.Header>
         <h3>{`Adding a goal to ${currentTracker.tracker_name}`}</h3>
         <button onClick={()=>closeHandle()}>Close</button>
-      </Row>
-      <Row className='add-goal-input-section'>
+    </Modal.Header>
+    <Modal.Body>
         <input
         type="text"
         placeholder="Enter a message to write yourself a goal"
           onChange={(e)=>setMessage(e.target.value)}
+          className='goal-message-input'
       />
+    </Modal.Body>
+    <Modal.Footer>
         <button className='add-goal-submit-button' onClick={()=>handleSubmit()}>submit</button>
-      </Row>
+    </Modal.Footer>
     </Modal>
       )}
     </>
