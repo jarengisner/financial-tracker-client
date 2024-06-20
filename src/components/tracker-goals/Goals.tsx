@@ -138,16 +138,16 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
               setNone={setNone}
             />
           ) : (
-            <h1>Not loaded, put spinner</h1>
+            <h1>Create a Tracker to add goals to</h1>
           )}
         </div>
         <div>
+        <div className='add-button-container'>
+            <Button onClick={()=>toggleAddModal()} className='add-goal-button'>Add Goal to this Tracker</Button>
+        </div>
           {trackers && activeGoals.length > 0
             ? activeGoals.map((goal) => (
                 <Row key={goal.goal_id} className="goal-card-row">
-                <div className='add-button-container'>
-                  <Button onClick={()=>toggleAddModal()} className='add-goal-button'>Add Goal to this Tracker</Button>
-                </div>
                   <Card className="goals-page-card">
                     <div className="goals-card-message-container">
                       <p className="goal-message">{goal.message}</p>

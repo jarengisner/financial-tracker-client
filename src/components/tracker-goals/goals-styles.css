@@ -75,6 +75,7 @@ nice white grey(text) - D3D9D4
 }
 .add-button-container{
   align-items: center;
+  margin-top: 1%;
 }
 
 .modal-header{
@@ -92,4 +93,52 @@ nice white grey(text) - D3D9D4
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.add-goal-tracker-name{
+  text-decoration: underline;
+}
+.goal-message-input{
+  height: 100px;
+  border-radius: 10px;
+}
+
+.close-button{
+  background-color:  transparent;
+  border: none;
+  font-size: x-large;
+  color: #ffffff;
+  transition: color .3s ease;
+}
+
+
+.close-button:hover{
+  background-color:  transparent;
+  border: none;
+  font-size: x-large;
+  color: red;
+  transition: color .3s ease;
+}
+
+.add-goal-submit-button{
+  background-color: #212A31;
+  border-radius: 5px;
+  width: 30%;
+  height: 35px;
+  border: none;
+  color: white;
+  opacity: 1;
+  transition: opacity .3s ease;
+}
+
+
+.add-goal-submit-button:hover{
+  background-color: #212A31;
+  border-radius: 5px;
+  width: 30%;
+  height: 35px;
+  border: none;
+  color: white;
+  opacity: .8;
+  transition: opacity .3s ease;
 }
