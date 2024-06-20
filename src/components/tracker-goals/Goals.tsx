@@ -107,6 +107,10 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
     setShowDeleteModal(!showDeleteModal);
   };
 
+  const refreshGoals = (id:any):void =>{
+    goalFetcher(id);
+  };
+
   return (
     <>
       {showEditModal && (
@@ -119,7 +123,7 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
         />
       )}
       {showAddModal && focusedTracker &&(
-      <AddGoalModal currentTracker={focusedTracker} user={user} token={token} show={showAddModal} toggleAddModal={toggleAddModal}/>
+      <AddGoalModal currentTracker={focusedTracker} user={user} token={token} show={showAddModal} toggleAddModal={toggleAddModal} refreshGoals={refreshGoals}/>
       )}
       {
          showDeleteModal && (
@@ -142,9 +146,11 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
           )}
         </div>
         <div>
+        {focusedTracker && (
         <div className='add-button-container'>
             <Button onClick={()=>toggleAddModal()} className='add-goal-button'>Add Goal to this Tracker</Button>
         </div>
+        )}
           {trackers && activeGoals.length > 0
             ? activeGoals.map((goal) => (
                 <Row key={goal.goal_id} className="goal-card-row">

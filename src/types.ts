@@ -26,3 +26,5 @@ export interface newGoal{
   message: string;
   tracker_id: number;
 };
+
+export type goalRefreshFunction = (arg: any) => void;

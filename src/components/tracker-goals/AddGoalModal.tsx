@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Row } from 'react-bootstrap';
 import { TrackerItem, listUser } from '../tracker-list/tracker-list-types';
-import { stateManipulationFunction, newGoal } from '../../types';
+import { stateManipulationFunction, newGoal, goalRefreshFunction } from '../../types';
 
 import './goals-styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,6 +15,7 @@ interface addGoalProps {
   token: string;
   show: boolean;
   toggleAddModal: stateManipulationFunction;
+  refreshGoals: goalRefreshFunction;
 }
 
 export const AddGoalModal: React.FC<addGoalProps> = ({
@@ -23,8 +24,14 @@ export const AddGoalModal: React.FC<addGoalProps> = ({
   token,
   show,
   toggleAddModal,
+  refreshGoals
 }) => {
   const [message, setMessage] = useState<string>('');
+
+
+  const closeHandle = (): void => {
+    toggleAddModal();
+  };
 
   const handleSubmit = (): void => {
     let postData:newGoal = {
@@ -43,14 +50,12 @@ export const AddGoalModal: React.FC<addGoalProps> = ({
     })
     .then((res)=>res.json())
     .then((data)=>{
-      //write code to refresh the page
+      refreshGoals(currentTracker.tracker_id);
+      closeHandle();
         console.log(data);
       })
   };
 
-  const closeHandle = (): void => {
-    toggleAddModal();
-  };
 
   return (
     <>
