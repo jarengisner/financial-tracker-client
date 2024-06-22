@@ -37,6 +37,9 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 
+//holds the goal id of the goal currently being edited
+  const [currentlyEditing, setCurrentlyEditing] = useState<number | null>(null);
+
   useEffect(() => {
     const userId: number = user.id;
     fetch(`http://localhost:8080/trackers/${userId}/all`, {
@@ -111,15 +114,22 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
     goalFetcher(id);
   };
 
+  const clearCurrentlyEditing = ():void =>{
+    setCurrentlyEditing(null);
+  };
+
   return (
     <>
-      {showEditModal && (
+      {showEditModal && focusedTracker && (
         <GoalEditModal
           currentTracker={focusedTracker}
           user={user}
           token={token}
           show={showEditModal}
           toggleEditModal={toggleEditModal}
+          refreshGoals={refreshGoals}
+          currentlyEditing={currentlyEditing}
+          clearCurrentlyEditing={clearCurrentlyEditing}
         />
       )}
       {showAddModal && focusedTracker &&(
@@ -161,7 +171,10 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
                     <div className="goals-card-button-container">
                       <button
                         className="goal-card-button"
-                        onClick={() => toggleEditModal()}
+                        onClick={() =>{
+                          setCurrentlyEditing(goal.goal_id)
+                          toggleEditModal()
+                        }}
                       >
                         <FontAwesomeIcon icon={faPenToSquare} />
                       </button>

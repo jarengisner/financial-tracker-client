@@ -142,3 +142,22 @@ nice white grey(text) - D3D9D4
   opacity: .8;
   transition: opacity .3s ease;
 }
+
+
+.edit-modal-input-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.edit-modal-input{
+  width: 60%;
+  height: 150px;
+  border-radius: 10px;
+}
+
+.edit-modal-header-container{
+  display: flex;
+  flex-direction: row;
+  align-items: space-between;
+}
