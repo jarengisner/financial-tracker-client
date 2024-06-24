@@ -136,8 +136,8 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
       <AddGoalModal currentTracker={focusedTracker} user={user} token={token} show={showAddModal} toggleAddModal={toggleAddModal} refreshGoals={refreshGoals}/>
       )}
       {
-         showDeleteModal && (
-        <DeleteWarningModal showDeleteModal={showDeleteModal} toggleShowDelete={toggleDeleteModal}/>
+         showDeleteModal && focusedTracker &&(
+        <DeleteWarningModal showDeleteModal={showDeleteModal} toggleShowDelete={toggleDeleteModal} refreshGoals={refreshGoals} currentTracker={focusedTracker}/>
         )
       }
       <Col md={10}>
