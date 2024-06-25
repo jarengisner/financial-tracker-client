@@ -45,18 +45,21 @@ export const GoalEditModal: React.FC<editGoalProps> = ({
       tracker_id: currentTracker.tracker_id,
     };
 
+    console.log(goalData);
+
     if(currentlyEditing){
-      fetch(`http://localhost:8080/goals/edit/${currentlyEditing}`, {
+      fetch(`http://localhost:8080/goal/edit/${currentlyEditing}`, {
         method: 'PUT',
       headers: {
-        'Centent-Type': 'application/json',
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(goalData),
       })
       .then((res)=>res.json())
       .then((data)=>{
-        //do something with the data we recieve
+        refreshGoals(currentTracker.tracker_id);
+        handleClose();
         console.log(data);
       })
       .catch((e)=>{

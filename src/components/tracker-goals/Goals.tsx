@@ -40,6 +40,8 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
 //holds the goal id of the goal currently being edited
   const [currentlyEditing, setCurrentlyEditing] = useState<number | null>(null);
 
+  const [currentlyDeleting, setCurrentlyDeleting] = useState<number | null >(null);
+
   useEffect(() => {
     const userId: number = user.id;
     fetch(`http://localhost:8080/trackers/${userId}/all`, {
@@ -137,7 +139,13 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
       )}
       {
          showDeleteModal && focusedTracker &&(
-        <DeleteWarningModal showDeleteModal={showDeleteModal} toggleShowDelete={toggleDeleteModal} refreshGoals={refreshGoals} currentTracker={focusedTracker}/>
+        <DeleteWarningModal showDeleteModal={showDeleteModal} 
+        toggleShowDelete={toggleDeleteModal} 
+        refreshGoals={refreshGoals} 
+        currentTracker={focusedTracker}
+        currentlyDeleting={currentlyDeleting}
+        token={token}
+        />
         )
       }
       <Col md={10}>
@@ -158,7 +166,7 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
         <div>
         {focusedTracker && (
         <div className='add-button-container'>
-            <Button onClick={()=>toggleAddModal()} className='add-goal-button'>Add Goal to this Tracker</Button>
+            <Button onClick={()=>toggleAddModal()} className='add-goal-button' variant='secondary'>Add Goal to this Tracker</Button>
         </div>
         )}
           {trackers && activeGoals.length > 0
@@ -178,7 +186,10 @@ export const Goals: React.FC<GoalProps> = ({ user, token }) => {
                       >
                         <FontAwesomeIcon icon={faPenToSquare} />
                       </button>
-                      <button className="goal-card-button" onClick={()=>toggleDeleteModal()}>
+                      <button className="goal-card-button" onClick={()=>{
+                        setCurrentlyDeleting(goal.goal_id)
+                        toggleDeleteModal()
+                      }}>
                         <FontAwesomeIcon icon={faTrash} />
                       </button>
                     </div>

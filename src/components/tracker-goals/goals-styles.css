@@ -165,8 +165,7 @@ nice white grey(text) - D3D9D4
 
 .delete-goal-message{
   font-size: 20px;
-  text-decoration: underline;
-  text-decoration-color: #dc3545;
+  margin-top: 3%;
 }
 
 .delete-goal-message-container{
@@ -174,10 +173,17 @@ nice white grey(text) - D3D9D4
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  border: 2px solid #dc3545;
+  padding: 1%;
+  border-radius: 10px;
 }
 
 .delete-modal-exit-button-container{
   display: grid;
   justify-content: end;
   margin-bottom: 2%;
+}
+
+.delete-goal-button{
+  margin-right: 12px;
 }
