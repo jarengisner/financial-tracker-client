@@ -1,0 +1,46 @@
+.settings-title-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 1.2%;
+  color: #d3d4d3;
+}
+
+.settings-page-text{
+  color: #d3d4d3;
+  font-size: 24px;
+}
+
+.settings-page-standard-container{
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+
+.settings-delete-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px solid #dc3545;
+  padding: 1%;
+  border-radius: 10px;
+}
+
+.caption{
+  font-size: 20px;
+  margin-top: 1%;
+}
+
+
+
+.settings-password-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px solid #6c757d;
+  padding: 1%;
+  border-radius: 10px;
+}

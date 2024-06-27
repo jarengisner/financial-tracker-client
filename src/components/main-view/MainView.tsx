@@ -154,7 +154,7 @@ export const MainView: React.FC = () => {
           />
           <Route
             path='/settings'
-            element={user && token ? <Settings /> : <Navigate to='/login' />}
+            element={user && token ? <Settings user={user} token={token}/> : <Navigate to='/login' />}
           />
         </Routes>
       </Row>
