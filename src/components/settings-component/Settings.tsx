@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
 import { User } from '../tracker-list/tracker-list-types';
+import { DeleteConfirmation } from './DeleteConfirmation';
+import { PasswordChange } from './PasswordChange';
 
 import './settings-style.css';
 
@@ -12,22 +14,29 @@ interface SettingsProps{
 
 export const Settings: React.FC<SettingsProps> = ({user, token}) => {
 
-const deleteHandle = ()=>{
-  fetch(`http://localhost:8080/users/delete/${user.user_id}`, {
-    method: 'DELETE', 
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    }
-  })
-  .then((res)=>res.json())
-  .then((data)=>{
-    console.log(data.message);
-  })
-}
+  const [showDeleteWarning, setShowDeleteWarning] = useState<boolean>(false);
+  const [showChangePass, setShowChangePass] = useState<boolean>(false);
 
+  const toggleDeleteWarning = ():void =>{
+    setShowDeleteWarning(!showDeleteWarning);
+  };
+
+  const toggleChangePass = ():void =>{
+    setShowChangePass(!showChangePass);
+  };
 
   return (
+    <>
+    {showDeleteWarning && (
+      <DeleteConfirmation user={user} token={token} showDeleteWarning={showDeleteWarning}
+      toggleDeleteWarning={toggleDeleteWarning}
+      />
+    )}
+    {
+      showChangePass && (
+        <PasswordChange />
+      )
+    }
     <Col md={10}>
     <Row>
       <div className='settings-title-container'>
@@ -39,7 +48,7 @@ const deleteHandle = ()=>{
           <p className='settings-page-text'>Change Password</p>
           <div className='settings-password-container'>
             <p className='settings-page-text caption'>Are you sure that you want to change your password?</p>
-            <Button variant='secondary'>Change Password</Button>
+            <Button variant='secondary' onClick={()=>toggleChangePass()}>Change Password</Button>
           </div>
         </div> 
       </Row>
@@ -48,10 +57,11 @@ const deleteHandle = ()=>{
           <p className='settings-page-text'>Delete Account</p>
           <div className='settings-delete-container'>
             <p className='settings-page-text caption'>Are you sure that you would like to delete your account?</p>
-            <Button variant='danger' onClick={()=>deleteHandle()}>Delete Account</Button>
+            <Button variant='danger' onClick={()=>toggleDeleteWarning()}>Delete Account</Button>
           </div>
         </div> 
       </Row>
     </Col>
+    </>
   );
 };
