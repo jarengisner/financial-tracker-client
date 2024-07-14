@@ -44,3 +44,24 @@
   padding: 1%;
   border-radius: 10px;
 }
+
+.password-change-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pass-change-buttons{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3%;
+}
+
+.password-change-input{
+  width: 75%;
+  border-radius: 10px;
+  border: none;
+}

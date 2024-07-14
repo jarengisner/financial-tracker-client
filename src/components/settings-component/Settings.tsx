@@ -34,7 +34,12 @@ export const Settings: React.FC<SettingsProps> = ({user, token}) => {
     )}
     {
       showChangePass && (
-        <PasswordChange />
+        <PasswordChange 
+          showChangePass={showChangePass} 
+          toggleChangePass={toggleChangePass} 
+          user={user}
+          token={token}
+        />
       )
     }
     <Col md={10}>
