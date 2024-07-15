@@ -40,7 +40,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border: 2px solid #6c757d;
+  border: 2px solid #124E66;
   padding: 1%;
   border-radius: 10px;
 }
@@ -64,4 +64,8 @@
   width: 75%;
   border-radius: 10px;
   border: none;
+}
+
+.logout-container{
+  border: 2px solid grey; 
 }

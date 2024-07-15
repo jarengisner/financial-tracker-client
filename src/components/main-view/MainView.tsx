@@ -127,6 +127,7 @@ export const MainView: React.FC = () => {
           />
           <Route path='/login' element={<Login onLogin={onLogin} />} />
 
+
           <Route
             path='/trackers/:id'
             element={

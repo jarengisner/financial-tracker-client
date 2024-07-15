@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button, Card, Form, FormGroup } from 'react-bootstrap';
 import '../login-component/login.styles.css';
 import { loginStateManipulation } from '../../types';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface loginProps {
   onLogin: loginStateManipulation;
@@ -11,6 +11,9 @@ interface loginProps {
 export const Login: React.FC<loginProps> = ({ onLogin }) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
+  const [register, setRegister] = useState<boolean>(false);
+
   const navigate = useNavigate();
 
   const handleLoginSubmit = (): void => {
@@ -50,7 +53,14 @@ export const Login: React.FC<loginProps> = ({ onLogin }) => {
       });
   };
 
+
+  const handleRegistration = ():void =>{
+    //placeholder
+  };
+
   return (
+    <>
+    {!register ? (
     <div className='login-container'>
       <Card className='login-card'>
         <Card.Title className='login-title'>Login</Card.Title>
@@ -85,15 +95,83 @@ export const Login: React.FC<loginProps> = ({ onLogin }) => {
               />
             </div>
           </FormGroup>
-          <Button
-            variant='primary'
-            className='login-submit-button'
-            onClick={handleLoginSubmit}
-          >
-            Login
-          </Button>
+          <div>
+            <Button
+             variant='secondary'
+             className='login-submit-button'
+              onClick={handleLoginSubmit}
+            >
+              Login
+            </Button>
+            <p className='no-account-message'>
+              No account? Sign up below
+            </p>
+              <Button
+                variant='secondary'
+                className='login-submit-button register-button'
+                onClick={()=>setRegister(true)}
+              >
+                Sign up
+              </Button>
+          </div>
         </Form>
       </Card>
     </div>
+    ):(
+    <div className='login-container'>
+      <Card className='login-card'>
+        <Card.Title className='login-title'>Sign Up</Card.Title>
+        <Form>
+          <FormGroup controlId='forUsername'>
+            <div className='username-container'>
+              <Form.Label className='login-input-title'>Username</Form.Label>
+              <Form.Control
+                type='text'
+                value={username}
+                required
+                placeholder='Username'
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                }}
+                className='login-input'
+              />
+            </div>
+          </FormGroup>
+          <FormGroup controlId='forPassword'>
+            <div className='password-container'>
+              <Form.Label className='login-input-title'>Password</Form.Label>
+              <Form.Control
+                type='password'
+                value={password}
+                required
+                placeholder='Password'
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                className='login-input'
+              />
+            </div>
+          </FormGroup>
+          <div className='registration-buttons-container'>
+            <Button
+             variant='secondary'
+             className='login-submit-button'
+              onClick={handleRegistration}
+            >
+              Sign Up
+            </Button>
+              <Button
+                variant='secondary'
+                className='login-submit-button back-button'
+                onClick={()=>setRegister(false)}
+              >
+                Back
+              </Button>
+          </div>
+        </Form>
+      </Card>
+    </div>
+    )}
+    </>
   );
 };

@@ -10,7 +10,7 @@
 
 .login-card {
   width: 30%;
-  height: 40vh;
+  height: auto;
   background-color: #748d92;
 }
 
@@ -53,4 +53,25 @@
   color: black;
   margin-top: 6%;
   width: 50%;
+}
+
+.register-button{
+  margin-top: 0;
+  margin-bottom: 2%;
+}
+
+.no-account-message{
+  margin-top: 6%;
+}
+
+.registration-buttons-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-button{
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
