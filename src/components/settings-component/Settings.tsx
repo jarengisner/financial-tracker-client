@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
-import { User } from '../tracker-list/tracker-list-types';
+import { listUser, User } from '../tracker-list/tracker-list-types';
 import { DeleteConfirmation } from './DeleteConfirmation';
 import { PasswordChange } from './PasswordChange';
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import './settings-style.css';
 
 interface SettingsProps{
-  user: User; 
+  user: listUser; 
   token: string;
 }
 

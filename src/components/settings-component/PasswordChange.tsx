@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { stateManipulationFunction } from '../../types';
-import { User } from "../tracker-list/tracker-list-types";
+import { listUser, User } from "../tracker-list/tracker-list-types";
 
 interface PassChangeProps{
   toggleChangePass: stateManipulationFunction;
   showChangePass: boolean;
-  user: User; 
+  user: listUser; 
   token: string;
 };
 
@@ -22,7 +22,7 @@ export const PasswordChange: React.FC<PassChangeProps> = ({toggleChangePass, sho
       password: newPassword
     };
 
-    fetch(`http://localhost:8080/users/update/password/${user.user_id}`, {
+    fetch(`http://localhost:8080/users/update/password/${user.id}`, {
       headers: {
       'Content-Type': 'application/json', 
       Authorization: `Bearer ${token}`

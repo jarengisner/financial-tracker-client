@@ -3,6 +3,7 @@ import { Button, Card, Form, FormGroup } from 'react-bootstrap';
 import '../login-component/login.styles.css';
 import { loginStateManipulation } from '../../types';
 import { Link, useNavigate } from 'react-router-dom';
+import { User } from '../tracker-list/tracker-list-types';
 
 interface loginProps {
   onLogin: loginStateManipulation;
@@ -13,6 +14,8 @@ export const Login: React.FC<loginProps> = ({ onLogin }) => {
   const [password, setPassword] = useState<string>('');
 
   const [register, setRegister] = useState<boolean>(false);
+
+  const [recentlyRegistered, setRecentlyRegistered] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -55,7 +58,29 @@ export const Login: React.FC<loginProps> = ({ onLogin }) => {
 
 
   const handleRegistration = ():void =>{
-    //placeholder
+    const newUser: any = {
+      username: username, 
+      password: password,
+    };
+
+    fetch('http://localhost:8080/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newUser),
+    })
+    .then((res)=>res.json())
+    .then((data)=>{
+      console.log('Successful creation')
+    })
+    .catch((err)=>{
+      console.log(err);
+      console.log('There was an issue in creating a new user');
+    })
+
+    setRecentlyRegistered(true);
+    setRegister(false);
   };
 
   return (
@@ -64,6 +89,9 @@ export const Login: React.FC<loginProps> = ({ onLogin }) => {
     <div className='login-container'>
       <Card className='login-card'>
         <Card.Title className='login-title'>Login</Card.Title>
+        {recentlyRegistered && (
+          <p className='register-success-message'>Successfully registered, please log in</p>
+        )}
         <Form>
           <FormGroup controlId='forUsername'>
             <div className='username-container'>
