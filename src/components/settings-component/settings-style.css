@@ -62,11 +62,17 @@
 
 .password-change-input{
   width: 75%;
-  border-radius: 10px;
+  border-radius: 5px;
   border: none;
+  padding: 4px;
 }
 
 .logout-container{
   border: 2px solid grey; 
 }
 
+
+.pass-change-header{
+  display: flex;
+  flex-direction: column;
+}

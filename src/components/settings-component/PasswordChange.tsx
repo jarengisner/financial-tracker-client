@@ -23,6 +23,7 @@ export const PasswordChange: React.FC<PassChangeProps> = ({toggleChangePass, sho
     };
 
     fetch(`http://localhost:8080/users/update/password/${user.id}`, {
+      method: 'PUT',
       headers: {
       'Content-Type': 'application/json', 
       Authorization: `Bearer ${token}`
@@ -31,7 +32,14 @@ export const PasswordChange: React.FC<PassChangeProps> = ({toggleChangePass, sho
     })
     .then((res)=>res.json())
     .then((data)=>{
-      console.log(data);
+      console.log({
+        id: data.id,
+        username: data.username,
+        message: "Successfully updated password"
+      });
+
+      localStorage.clear();
+      window.location.reload();
     })
     .catch((err)=>{
       console.log(err);
@@ -42,7 +50,10 @@ export const PasswordChange: React.FC<PassChangeProps> = ({toggleChangePass, sho
   return(
     <Modal show={showChangePass} centered>
       <Modal.Header>
-        <h2>Change Password</h2>
+        <div className='pass-change-header'>
+          <h2>Change Password</h2>
+          <p style={{color: '#dc3545'}}>You will be logged out after changing your password</p>
+        </div>
       </Modal.Header>
       <Modal.Body>
       <div className='password-change-container'>
@@ -55,7 +66,7 @@ export const PasswordChange: React.FC<PassChangeProps> = ({toggleChangePass, sho
         </p>
         <input type='text' className='password-change-input' onChange={(e)=>setCheckPassword(e.target.value)}/>
         <div className='pass-change-buttons'>
-          <Button variant='primary' style={{marginRight: '1%'}}>
+          <Button variant='primary' style={{marginRight: '1%'}} onClick={()=>passwordChangeHandler()}>
             Confirm
           </Button>
           <Button variant='secondary' onClick={toggleChangePass} style={{marginLeft: '1%'}}>
