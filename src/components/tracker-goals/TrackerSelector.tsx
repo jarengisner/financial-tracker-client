@@ -38,24 +38,24 @@ export const TrackerSelector: React.FC<selectorProps> = ({
     <Row>
       <div className='tracker-selector-outer-container'>
         <h2 className='drop-down-title'>Select Tracker to edit or add to:</h2>
-        <DropdownButton id='drop-down-main' title={selectedTrackerName}>
-          <Dropdown.Item
-            className='drop-down-button'
-            as='button'
-            onClick={() => noneHandler()}
-          >
-            None
-          </Dropdown.Item>
-          {trackers?.map((t) => (
+          <DropdownButton id='drop-down-main' title={selectedTrackerName}>
             <Dropdown.Item
               className='drop-down-button'
               as='button'
-              onClick={() => clickHandler(t)}
+              onClick={() => noneHandler()}
             >
-              {t.tracker_name}
+              None
             </Dropdown.Item>
-          ))}
-        </DropdownButton>
+            {trackers?.map((t) => (
+              <Dropdown.Item
+                className='drop-down-button'
+                as='button'
+                onClick={() => clickHandler(t)}
+              >
+                {t.tracker_name}
+              </Dropdown.Item>
+            ))}
+          </DropdownButton>
       </div>
     </Row>
   );

@@ -151,7 +151,7 @@ export const MainView: React.FC = () => {
           />
           <Route
             path='/daily'
-            element={user && token ? <Daily /> : <Navigate to='/login' />}
+            element={user && token ? <Daily user={user} token={token}/> : <Navigate to='/login' />}
           />
           <Route
             path='/settings'
