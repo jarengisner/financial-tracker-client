@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Dropdown, DropdownButton, Row } from 'react-bootstrap';
 import { listUser, TrackerItem, User } from '../tracker-list/tracker-list-types';
+import { DailyForm } from './DailyForm';
 
 interface DailyProps{
   user: listUser;
@@ -51,6 +52,11 @@ export const Daily: React.FC<DailyProps> = ({user, token}) => {
           ))}
         </DropdownButton>
       </Row>
+      {selectedTracker &&(
+        <Row>
+          <DailyForm selectedTracker={selectedTracker} user={user} token={token} />
+        </Row>
+      )}
     </Col>
   );
 };
