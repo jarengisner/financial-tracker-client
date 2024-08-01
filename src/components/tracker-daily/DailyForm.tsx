@@ -32,11 +32,17 @@ export const DailyForm: React.FC<FormProps> = ({selectedTracker, user, token})=>
   return(
     <div className='daily-form-container'>
       <p className='caption-for-daily'>Amount put into savings today</p>
-      <input type='text' />
+        <input type='text' />
+      <p className='caption-for-daily'>Savings note</p>
+        <input type='textarea' />
       <p className='caption-for-daily'>Amount spent on "needs" today</p>
-      <input type='text' />
+        <input type='text' />
+      <p className='caption-for-daily'>Needs Note</p>
+        <input type='textarea' />
       <p className='caption-for-daily'>Amount spent on "wants" today</p>
-      <input type='text' />
+        <input type='text' />
+      <p className='caption-for-daily'>Wants note</p>
+        <input type='textarea' />
     </div>
   );
 };
