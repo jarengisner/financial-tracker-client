@@ -3,6 +3,9 @@ import { Col, Dropdown, DropdownButton, Row } from 'react-bootstrap';
 import { listUser, TrackerItem, User } from '../tracker-list/tracker-list-types';
 import { DailyForm } from './DailyForm';
 
+
+import './daily-styles.css'
+
 interface DailyProps{
   user: listUser;
   token: string;
@@ -42,7 +45,7 @@ export const Daily: React.FC<DailyProps> = ({user, token}) => {
 
   return (
     <Col md={10}>
-      <Row>
+      <Row style={{marginTop: "1.5%"}}>
         <DropdownButton title={title}>
           <Dropdown.Item as='button' onClick={()=>noneHandler()}>None</Dropdown.Item>
           {usersTrackers?.map((t)=>(

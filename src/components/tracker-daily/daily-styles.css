@@ -3,8 +3,33 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 1.5%;
+  color: white;
 };
 
 .daily-button-test{
   background-color: red;
+}
+
+
+
+.dropdown-button{
+  margin-top: 10%;
+};
+
+
+.caption-for-daily{
+  text-decoration: underline;
+}
+
+
+.daily-input{
+  width: 10%;
+  height: 2.5em;
+  margin-bottom: 1%;
+}
+
+.daily-note-input{
+  width: 40%;
+  margin-bottom: 1%;
 }
