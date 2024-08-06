@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Col } from 'react-bootstrap';
+import { Button, Col } from 'react-bootstrap';
 import { listUser, TrackerItem } from '../tracker-list/tracker-list-types';
 
 import './daily-styles.css'
@@ -23,10 +23,28 @@ export const DailyForm: React.FC<FormProps> = ({selectedTracker, user, token})=>
 
   //need to figure out how we are gonna format? or maybe it formats in the backend
 //  const [submissionDate, setSubmissionDate] = useState<date>();
+  
+
+const formatDate = (date: Date):string =>{
+  const year: any = date.getFullYear();
+  const month:any = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day:any = date.getDate().toString().padStart(2, '0');
+
+  return `${year}-${month}-${day}`
+};
 
 
   const submitHandle = ()=>{
-    //placeholder
+    const submitData: any = {
+      saved: savings,
+      needs: needs,
+      wants: wants,
+      save$d_note: savingsNote,
+      needs_note: needsNote,
+      wants_note: wantsNote,
+      tracker_id: selectedTracker.tracker_id,
+      entry_date: formatDate(new Date())
+    };
   };
 
   return(
@@ -58,6 +76,12 @@ export const DailyForm: React.FC<FormProps> = ({selectedTracker, user, token})=>
         <textarea className='daily-note-input'
           onChange={(e)=>setWantsNote(e.target.value)}
         />
+      <Button 
+        className='daily-submit-button'
+        onClick={()=>submitHandle()}
+      >
+        Submit Daily
+      </Button>
     </div>
   );
 };
