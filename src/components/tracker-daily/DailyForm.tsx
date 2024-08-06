@@ -39,12 +39,28 @@ const formatDate = (date: Date):string =>{
       saved: savings,
       needs: needs,
       wants: wants,
-      save$d_note: savingsNote,
+      saved_note: savingsNote,
       needs_note: needsNote,
       wants_note: wantsNote,
       tracker_id: selectedTracker.tracker_id,
       entry_date: formatDate(new Date())
     };
+
+    fetch(`http://localhost:8080/daily`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(submitData),
+    })
+    .then((res)=>res.json())
+    .then((resData)=>{
+      console.log(resData);
+    })
+    .catch((err)=>{
+      console.log('There was an error when submitting the daily ' + err);
+    });
   };
 
   return(

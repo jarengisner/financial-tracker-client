@@ -41,7 +41,12 @@ export const Daily: React.FC<DailyProps> = ({user, token}) => {
     setTitle('No tracker selected');
   };
 
-
+  //makes sure that tracker is displayed on button when refreshing
+  useEffect(()=>{
+    if(selectedTracker){
+      setTitle(selectedTracker.tracker_name);
+    }
+  }, [selectedTracker])
 
   return (
     <Col md={10}>
