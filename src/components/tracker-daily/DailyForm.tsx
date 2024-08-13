@@ -63,12 +63,20 @@ const formatDate = (date: Date):string =>{
     });
   };
 
+  const inputHandle = (e: string):any =>{
+    if(e.length > 0){
+      return JSON.parse(e);
+    }else{
+      return 0;
+    }
+  };
+
   return(
     <div className='daily-form-container'>
       <p className='caption-for-daily'>Amount put into savings today</p>
         <input type='text' className='daily-input' 
           placeholder='$'
-          onChange={(e)=>setSavings(JSON.parse(e.target.value))}
+          onChange={(e)=>setSavings(inputHandle(e.target.value))}
         />
       <p className='caption-for-daily'>Savings note</p>
         <textarea className='daily-note-input'
@@ -77,7 +85,7 @@ const formatDate = (date: Date):string =>{
       <p className='caption-for-daily'>Amount spent on "needs" today</p>
         <input type='text' className='daily-input' 
           placeholder='$'
-          onChange={(e)=>setNeeds(JSON.parse(e.target.value))}
+          onChange={(e)=>setNeeds(inputHandle(e.target.value))}
         />
       <p className='caption-for-daily'>Needs Note</p>
         <textarea className='daily-note-input'
@@ -86,7 +94,7 @@ const formatDate = (date: Date):string =>{
       <p className='caption-for-daily'>Amount spent on "wants" today</p>
         <input type='text' className='daily-input' 
           placeholder='$'
-          onChange={(e)=>setWants(JSON.parse(e.target.value))}
+          onChange={(e)=>setWants(inputHandle(e.target.value))}
         />
       <p className='caption-for-daily'>Wants note</p>
         <textarea className='daily-note-input'

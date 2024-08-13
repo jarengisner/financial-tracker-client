@@ -27,9 +27,16 @@
   width: 10%;
   height: 2.5em;
   margin-bottom: 1%;
+  border-radius: 10px;
 }
 
 .daily-note-input{
   width: 40%;
   margin-bottom: 1%;
 }
+
+.daily-note-input{
+  border-radius: 10px;
+}
+
+
