@@ -51,7 +51,7 @@ export const Daily: React.FC<DailyProps> = ({user, token}) => {
   return (
     <Col md={10}>
       <Row style={{marginTop: "1.5%"}}>
-        <DropdownButton title={title}>
+        <DropdownButton title={title} className='daily-dropdown-select' id='daily-drop'>
           <Dropdown.Item as='button' onClick={()=>noneHandler()}>None</Dropdown.Item>
           {usersTrackers?.map((t)=>(
             <Dropdown.Item as='button' onClick={()=>setSelectedTracker(t)}>
