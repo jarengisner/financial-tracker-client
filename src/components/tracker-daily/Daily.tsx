@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Dropdown, DropdownButton, Row } from 'react-bootstrap';
+import { Col, Dropdown, DropdownButton, DropdownItem, NavDropdown, Row } from 'react-bootstrap';
 import { listUser, TrackerItem, User } from '../tracker-list/tracker-list-types';
 import { DailyForm } from './DailyForm';
 
@@ -16,7 +16,7 @@ export const Daily: React.FC<DailyProps> = ({user, token}) => {
 
   const [selectedTracker, setSelectedTracker] = useState<TrackerItem | null>(null);
 
-  const [title, setTitle] = useState<string>('No Tracker selected');
+  const [title, setTitle] = useState<string>('No Tracker Selected');
 
   useEffect(()=>{
     fetch(`http://localhost:8080/trackers/${user.id}/all`, {
@@ -51,7 +51,7 @@ export const Daily: React.FC<DailyProps> = ({user, token}) => {
   return (
     <Col md={10}>
       <Row style={{marginTop: "1.5%"}}>
-        <DropdownButton title={title} className='daily-dropdown-select' id='daily-drop'>
+        <DropdownButton title={title} className='daily-dropdown-select' id='daily-drop'  drop='down-centered'>
           <Dropdown.Item as='button' onClick={()=>noneHandler()}>None</Dropdown.Item>
           {usersTrackers?.map((t)=>(
             <Dropdown.Item as='button' onClick={()=>setSelectedTracker(t)}>
@@ -61,8 +61,8 @@ export const Daily: React.FC<DailyProps> = ({user, token}) => {
         </DropdownButton>
       </Row>
       {selectedTracker &&(
-        <Row>
-          <DailyForm selectedTracker={selectedTracker} user={user} token={token} />
+        <Row style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <DailyForm selectedTracker={selectedTracker} user={user} token={token} />
         </Row>
       )}
     </Col>
