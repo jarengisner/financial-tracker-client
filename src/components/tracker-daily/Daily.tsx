@@ -50,6 +50,9 @@ export const Daily: React.FC<DailyProps> = ({user, token}) => {
 
   return (
     <Col md={10}>
+      <div className="daily-title-container">
+        <h1 className="daily-title">Daily</h1>
+      </div>
       <Row style={{marginTop: "1.5%"}}>
         <DropdownButton title={title} className='daily-dropdown-select' id='daily-drop'  drop='down-centered'>
           <Dropdown.Item as='button' onClick={()=>noneHandler()}>None</Dropdown.Item>

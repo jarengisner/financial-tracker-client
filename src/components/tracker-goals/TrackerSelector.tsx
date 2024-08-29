@@ -37,8 +37,7 @@ export const TrackerSelector: React.FC<selectorProps> = ({
   return (
     <Row>
       <div className='tracker-selector-outer-container'>
-        <h2 className='drop-down-title'>Select Tracker to edit or add to:</h2>
-          <DropdownButton id='drop-down-main' title={selectedTrackerName}>
+          <DropdownButton id='drop-down-main' title={selectedTrackerName} drop='down-centered'>
             <Dropdown.Item
               className='drop-down-button'
               as='button'

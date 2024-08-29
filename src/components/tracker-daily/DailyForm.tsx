@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Col, Modal } from 'react-bootstrap';
+import { Button, Col, Modal, Row } from 'react-bootstrap';
 import { listUser, TrackerItem } from '../tracker-list/tracker-list-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCheck, faX} from '@fortawesome/free-solid-svg-icons';
@@ -97,39 +97,61 @@ const formatDate = (date: Date):string =>{
         </Modal.Body>
       </Modal>
       <div className='daily-form-container'>
-        <p className='caption-for-daily'>Amount put into savings today</p>
-          <input type='text' className='daily-input' 
-            placeholder='$'
-            onChange={(e)=>setSavings(inputHandle(e.target.value))}
-          />
-        <p className='caption-for-daily'>Savings note</p>
-          <textarea className='daily-note-input'
-            onChange={(e)=>setSavingsNote(e.target.value)}
-          />
-        <p className='caption-for-daily'>Amount spent on "needs" today</p>
-          <input type='text' className='daily-input' 
-            placeholder='$'
-            onChange={(e)=>setNeeds(inputHandle(e.target.value))}
-          />
-        <p className='caption-for-daily'>Needs Note</p>
-          <textarea className='daily-note-input'
-            onChange={(e)=>setNeedsNote(e.target.value)}
-          />
-        <p className='caption-for-daily'>Amount spent on "wants" today</p>
-          <input type='text' className='daily-input' 
-            placeholder='$'
-            onChange={(e)=>setWants(inputHandle(e.target.value))}
-          />
-        <p className='caption-for-daily'>Wants note</p>
-          <textarea className='daily-note-input'
-            onChange={(e)=>setWantsNote(e.target.value)}
-          />
+      <Row>
+        <Col>
+          <div>
+            <p className='caption-for-daily'>Amount put into savings today</p>
+              <input type='text' className='daily-input' 
+                placeholder='$'
+                onChange={(e)=>setSavings(inputHandle(e.target.value))}
+              />
+          </div>
+        </Col>
+        <Col>
+          <div>
+              <textarea className='daily-note-input'
+                onChange={(e)=>setSavingsNote(e.target.value)}
+              />
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <div>
+          <p className='caption-for-daily'>Amount spent on "needs" today</p>
+            <input type='text' className='daily-input' 
+              placeholder='$'
+              onChange={(e)=>setNeeds(inputHandle(e.target.value))}
+            />
+        </div>
+        <div>
+          <p className='caption-for-daily'>Needs Note</p>
+            <textarea className='daily-note-input'
+              onChange={(e)=>setNeedsNote(e.target.value)}
+            />
+        </div>
+      </Row>
+      <Row>
+        <div>
+          <p className='caption-for-daily'>Amount spent on "wants" today</p>
+            <input type='text' className='daily-input' 
+              placeholder='$'
+              onChange={(e)=>setWants(inputHandle(e.target.value))}
+            />
+        </div>
+        <div>
+          <p className='caption-for-daily'>Wants note</p>
+            <textarea className='daily-note-input'
+              onChange={(e)=>setWantsNote(e.target.value)}
+            />
+        </div>
+      </Row>
           {sending ? (
             <ClipLoader loading={sending}/>
           ):(
         <Button 
           className='daily-submit-button'
           onClick={()=>submitHandle()}
+          variant='light'
         >
           Submit Daily
         </Button>
