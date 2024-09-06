@@ -71,8 +71,8 @@ export const TrackerSettings: React.FC<TrackerSettingsProps> = ({
   };
 
   return (
-    <Col>
-      <div>
+    <Col style={{overflowY: 'scroll'}}>
+      <div style={{overflowY: 'scroll'}}>
         <div className='back-button-container'>
           <Button
             className='settings-back-button'
@@ -91,7 +91,7 @@ export const TrackerSettings: React.FC<TrackerSettingsProps> = ({
             ) : null}
           </div>
         </div>
-        <div className='settings-edit-tracker'>
+        <div className='settings-edit-tracker' style={{overflowY: 'scroll'}}>
           {editorOpen ? (
             <div className='tracker-open-container'>
               <div className='edit-tracker-container-open'>

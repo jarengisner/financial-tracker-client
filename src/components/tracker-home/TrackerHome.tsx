@@ -102,7 +102,7 @@ export const TrackerHome: React.FC<TrackerHomeProps> = ({ token }) => {
   }, [id, token]);
 
   return (
-    <Col md={10}>
+    <Col md={10} style={{overflowY: 'scroll'}}>
       {currentTracker && settings === false ? (
         <>
           <div className='tracker-home-info-container'>
@@ -165,14 +165,12 @@ export const TrackerHome: React.FC<TrackerHomeProps> = ({ token }) => {
           </div>
         </>
       ) : currentTracker && settings === true ? (
-        <>
           <TrackerSettings
             token={token}
             tracker={currentTracker}
             closeSettings={closeSettings}
             id={currentTracker.tracker_id}
           />
-        </>
       ) : (
         <ClipLoader />
       )}
