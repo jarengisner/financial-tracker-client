@@ -38,13 +38,13 @@ nice white grey(text) - D3D9D4
 }
 
 .enter-tracker-view-icon {
-  color: #d3d9d4;
+  color: #124e66;
   font-size: xx-large;
   transition: color 0.3s ease;
 }
 
 .enter-tracker-view-icon:hover {
-  color: #124e66;
+  color: #d3d9d4;
 }
 
 .enter-tracker-view-container {
@@ -73,11 +73,22 @@ nice white grey(text) - D3D9D4
   background-color: #212a31;
   border: none;
   color: #748d92;
+  transition: color .3s ease;
+}
+
+.add-tracker-button:hover{
+  color: #ffffff;
 }
 
 .add-tracker-card {
   background-color: #212a31;
   border: 2px solid #748d92;
+  transition: border .3s ease;
+}
+
+.add-tracker-card:hover{
+  color:#ffffff;
+  border: 2px solid #ffffff;
 }
 
 .modal-content {

@@ -25,15 +25,17 @@
 
 
 .daily-input{
-  width: 10%;
+  width: 70%;
   height: 2.5em;
   margin-bottom: 1%;
   border-radius: 10px;
 }
 
 .daily-note-input{
-  width: 40%;
+  width: 70%;
   margin-bottom: 1%;
+  height: 90%;
+  font-size: 16px;
 }
 
 .daily-note-input{

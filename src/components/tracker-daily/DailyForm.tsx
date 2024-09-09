@@ -109,6 +109,7 @@ const formatDate = (date: Date):string =>{
         </Col>
         <Col>
           <div>
+            <p className='caption-for-daily'>Savings Note</p>
               <textarea className='daily-note-input'
                 onChange={(e)=>setSavingsNote(e.target.value)}
               />
@@ -116,34 +117,42 @@ const formatDate = (date: Date):string =>{
         </Col>
       </Row>
       <Row>
-        <div>
-          <p className='caption-for-daily'>Amount spent on "needs" today</p>
-            <input type='text' className='daily-input' 
-              placeholder='$'
-              onChange={(e)=>setNeeds(inputHandle(e.target.value))}
-            />
-        </div>
-        <div>
-          <p className='caption-for-daily'>Needs Note</p>
-            <textarea className='daily-note-input'
-              onChange={(e)=>setNeedsNote(e.target.value)}
-            />
-        </div>
+        <Col>
+          <div>
+            <p className='caption-for-daily'>Amount spent on "needs" today</p>
+              <input type='text' className='daily-input' 
+                placeholder='$'
+                onChange={(e)=>setNeeds(inputHandle(e.target.value))}
+              />
+          </div>
+        </Col>
+        <Col>
+          <div>
+            <p className='caption-for-daily'>Needs Note</p>
+              <textarea className='daily-note-input'
+                onChange={(e)=>setNeedsNote(e.target.value)}
+              />
+          </div>
+        </Col>
       </Row>
       <Row>
-        <div>
-          <p className='caption-for-daily'>Amount spent on "wants" today</p>
-            <input type='text' className='daily-input' 
-              placeholder='$'
-              onChange={(e)=>setWants(inputHandle(e.target.value))}
-            />
-        </div>
-        <div>
-          <p className='caption-for-daily'>Wants note</p>
-            <textarea className='daily-note-input'
-              onChange={(e)=>setWantsNote(e.target.value)}
-            />
-        </div>
+        <Col>
+          <div>
+            <p className='caption-for-daily'>Amount spent on "wants" today</p>
+              <input type='text' className='daily-input' 
+                placeholder='$'
+                onChange={(e)=>setWants(inputHandle(e.target.value))}
+              />
+          </div>
+        </Col>
+        <Col>
+          <div>
+            <p className='caption-for-daily'>Wants note</p>
+              <textarea className='daily-note-input'
+                onChange={(e)=>setWantsNote(e.target.value)}
+              />
+          </div>
+        </Col>
       </Row>
           {sending ? (
             <ClipLoader loading={sending}/>
