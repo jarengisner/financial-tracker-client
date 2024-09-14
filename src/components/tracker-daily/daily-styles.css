@@ -1,7 +1,7 @@
 .daily-form-container{
   margin-top: 1.5%;
   color: black;
-  background-color: #748D92;
+  background-color: #6C757D;
   width: 66%;
   font-size: 18px;
   border-radius: 20px;
@@ -29,6 +29,7 @@
   height: 2.5em;
   margin-bottom: 1%;
   border-radius: 10px;
+  border: none;
 }
 
 .daily-note-input{
