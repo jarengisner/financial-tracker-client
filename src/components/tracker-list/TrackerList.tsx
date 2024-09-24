@@ -9,6 +9,7 @@ import { TrackerItem } from './tracker-list-types';
 //stylesheet
 import '../tracker-list/tracker-list-styles.css';
 import { Link } from 'react-router-dom';
+import { CreateTracker } from './CreateTracker';
 
 interface TrackerComponentProps {
   user: listUser;
@@ -115,6 +116,18 @@ export const TrackerList: React.FC<TrackerComponentProps> = ({
 
   return (
     <>
+      <CreateTracker
+        show={showModal}
+        yearlyCheckHandle={yearlyCheckHandle}
+        monthlyCheckHandle={monthlyCheckHandle}
+        modalCloseHandle={modalCloseHandler}
+        setNewSavingsGoal={setNewSavingsGoal}
+        setnewWantsGoal={setNewWantsGoal}
+        setNewNeedsGoal={setNewNeedsGoal}
+        isMonthly={isMonthly}
+        isYearly={isYearly}
+        setNewTrackerName={setNewTrackerName}
+        />
       <Modal
         show={showModal}
         className="create-tracker-modal"
