@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Modal } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 
 interface CreateTrackerProps {
   show: boolean;
@@ -28,29 +28,11 @@ export const CreateTracker: React.FC<CreateTrackerProps> =
   isYearly
   })=>{
   //state to hold which slide we are on
-  const [showNameQ, setShowNameQ] = useState<boolean>();
-  const [showMonthOrYear, setShowMonthOrYear] = useState<boolean>();
-  const [showSavingsGoal, setShowSavingsGoal] = useState<boolean>();
-  const [showWantsGoal, setShowWantsGoal] = useState<boolean>();
-  const [showNeedsGoal, setShowNeedsGoal] = useState<boolean>();
-  /*
-   *
-  *
-      <CreateTracker
-        show={showModal}
-        yearlyCheckHandle={yearlyCheckHandle}
-        monthlyCheckHandle={monthlyCheckHandle}
-        modalCloseHandle={modalCloseHandler}
-        setNewSavingsGoal={setNewSavingsGoal}
-        setnewWantsGoal={setNewWantsGoal}
-        setNewNeedsGoal={setNewNeedsGoal}
-        isMonthly={isMonthly}
-        isYearly={isYearly}
-        setNewTrackerName={setNewTrackerName}
-        />
-  *
-  *
-  * */
+  const [showNameQ, setShowNameQ] = useState<boolean>(true);
+  const [showMonthOrYear, setShowMonthOrYear] = useState<boolean>(false);
+  const [showSavingsGoal, setShowSavingsGoal] = useState<boolean>(false);
+  const [showWantsGoal, setShowWantsGoal] = useState<boolean>(false);
+  const [showNeedsGoal, setShowNeedsGoal] = useState<boolean>(false);
 
 
   return(
@@ -65,6 +47,12 @@ export const CreateTracker: React.FC<CreateTrackerProps> =
               className="create-tracker-text-input"
               onChange={(e)=>setNewTrackerName(e.target.value)}
             />
+            <Button onClick={()=>{
+              setShowNameQ(false);
+              setShowMonthOrYear(true);
+            }}>
+              Next
+            </Button>
           </div>
         )}
         {showMonthOrYear &&(
@@ -85,6 +73,12 @@ export const CreateTracker: React.FC<CreateTrackerProps> =
               checked={isMonthly}
               onChange={() => monthlyCheckHandle()}
             />
+            <Button onClick={()=>{
+              setShowMonthOrYear(false);
+              setShowSavingsGoal(true);
+            }}>
+              Next
+            </Button>
           </div>
         )}
         {showSavingsGoal &&(
@@ -96,6 +90,13 @@ export const CreateTracker: React.FC<CreateTrackerProps> =
               className="create-tracker-text-input"
               onChange={(e)=>setNewSavingsGoal(Number(e.target.value))}
             />
+            <Button onClick={()=>{
+              setShowSavingsGoal(false)
+              setShowWantsGoal(true);
+            }
+            }>
+              Next
+            </Button>
           </div>
         )}
         {showWantsGoal &&(
@@ -107,6 +108,12 @@ export const CreateTracker: React.FC<CreateTrackerProps> =
               className="create-tracker-text-input"
               onChange={(e)=>setnewWantsGoal(Number(e.target.value))}
             />
+            <Button onClick={()=>{
+              setShowWantsGoal(false)
+              setShowNeedsGoal(true)
+            }}>
+             Next 
+            </Button>
           </div>
         )}
         {showNeedsGoal &&(
